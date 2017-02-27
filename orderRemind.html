@@ -1,0 +1,15 @@
+---
+# 彭元兵
+layout:  default
+title:   订单关怀-下单提醒
+# 自定义内容
+script:  script/orderReminder_script.html
+subName:   下单提醒
+description:   当买家下单时，发送短信给买家！
+---
+<link href="assets/css/order.sms.css?v={{site.version}}" rel="stylesheet" />
+<div class="page-container">
+    {% include order_remind_icons.html %}
+
+</div>
+{% include {{page.script}}%}

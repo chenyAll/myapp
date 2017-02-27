@@ -1,0 +1,66 @@
+---
+layout:  default
+title:   会员等级分析
+script: script/memberRankRpt_script.html
+---
+<link href="assets/css/chart.css?v={{site.version}}" rel="stylesheet" />
+<div class="page-container">
+    <div class="page-content show-border">
+        <div class="page-head show-tool">
+            <span class="str-name">会员等级分析</span>
+            <span class="str-desc">根据会员等级划分，显示各个等级会员数</span>
+        </div>
+        <div style="padding:50px">
+            <div class="numtitle"><span class="totalCircular"></span>会员总数<span id="membertotalnum">0</span><span class="membernumCircular"></span>会员数</div>
+            <table class="gradeTbl">
+                <tr>
+                    <td class="lefttd">至尊VIP会员(VIP4)<span class="crm-icon crm-icon-huiyuanfuwu"></span></td>
+                    <td class="righttd">
+                        <div id="num4" style="text-align:right;color:#6f6f6f;">0</div>
+                        <div class="layui-progress layui-progress-big" lay-filter="membernum4">
+                            <div class="layui-progress-bar"></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="lefttd">VIP会员(VIP3)<span class="crm-icon crm-icon-vip"></span></td>
+                    <td class="righttd">
+                        <div id="num3" style="text-align:right;color:#6f6f6f;">0</div>
+                        <div class="layui-progress layui-progress-big" lay-filter="membernum3">
+                            <div class="layui-progress-bar"></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="lefttd">高级会员(VIP2)<span class="crm-icon crm-icon-gaojimoshi"></span></td>
+                    <td class="righttd">
+                        <div id="num2" style="text-align:right;color:#6f6f6f;">0</div>
+                        <div class="layui-progress layui-progress-big" lay-filter="membernum2">
+                            <div class="layui-progress-bar"></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="lefttd">普通会员(VIP1)<span class="crm-icon crm-icon-putonghuiyuan"></span></td>
+                    <td class="righttd">
+                        <div id="num1" style="text-align:right;color:#6f6f6f;">0</div>
+                        <div class="layui-progress layui-progress-big" lay-filter="membernum1">
+                            <div class="layui-progress-bar"></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="lefttd">无等级会员<span class="crm-icon crm-icon-putonghuiyuanicon"></span></td>
+                    <td class="righttd">
+                        <div id="num0" style="text-align:right;color:#6f6f6f;">0</div>
+                        <div class="layui-progress layui-progress-big" lay-filter="membernum0">
+                            <div class="layui-progress-bar"></div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+{% assign url = page.url | split:'.' %}
+{% include script{{url.first}}_script.html %}

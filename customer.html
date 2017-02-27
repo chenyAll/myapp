@@ -1,0 +1,352 @@
+---
+layout:  default
+title:   客户资料
+---
+<div class="page-container">
+    <div class="page-alert show-border"><i class="crm-icon crm-icon-help"></i>提示：客户资料按最后交易时间倒序查询，只有交易成功的客户才会更新交易时间，所以交易还未完成的客户将显示在后面。</div>
+    <div class="page-content show-border">
+        <div class="page-head show-tool">
+            <span class="str-name">客户资料</span>
+            <span class="str-desc">所有在您店铺里成交的客户和未成交的客户，可以设置普通会员级别以上会员的等级、生日、电话、邮箱等信息</span>
+        </div>
+        <div class="page-search">
+            <form class="layui-form" id="frmSearch">
+                <div class="layui-form-item">
+
+                    <label class="layui-form-label" style="width:auto">快速筛选</label>
+                    <div class="layui-input-inline">
+                        <select name="48060">
+                            <option value=" ">所有客户</option>
+                            <option value="t.tran_num>0">成交客户</option>
+                            <option value="t.tran_num=0">潜在客户</option>
+                            <option value="t.dt_last_tran<getdate()-90">超过3个月未购买客户</option>
+                            <option value="t.dt_last_tran<getdate()-180">超过半年未购买客户</option>
+                            <option value="t.dt_last_tran<getdate()-360">超过一年未购买客户</option>
+                            <option value="t.tran_num=1">只购买一次客户</option>
+                            <option value="t.tran_num>1">多次购买客户</option>
+                        </select>
+                    </div>
+
+                    <label class="layui-form-label" style="width:auto">会员等级</label>
+                    <div class="layui-input-inline">
+                        <select name="48052">
+                            <option value=" ">所有</option>
+                            <option value="t.vip=''">无等级会员</option>
+                            <option value="t.vip='1'">普通会员</option>
+                            <option value="t.vip='2'">高级会员</option>
+                            <option value="t.vip='3'">VIP会员</option>
+                            <option value="t.vip='4'">至尊VIP会员</option>
+                        </select>
+                    </div>
+
+                    <label class="layui-form-label" style="width:auto">标签</label>
+                    <div class="layui-input-inline">
+                        <select name="tag_id" id="tag_id">
+                            <option value=" ">所有</option>
+                        </select>
+                    </div>
+
+                    <label class="layui-form-label" style="width:auto">客户昵称</label>
+                    <div class="layui-input-inline"><input type="text" name="name" autocomplete="off" placeholder="请输入完整昵称" class="layui-input"></div>
+
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label" style="width:auto">交易额</label>
+                    <div class="layui-input-inline" style="width:60px"><input type="text" name=">tran_amt" class="layui-input"></div>
+                    <div class="layui-form-mid">-</div>
+                    <div class="layui-input-inline" style="width:60px"><input type="text" name="<tran_amt" width="60px" class="layui-input"></div>
+
+                    <label class="layui-form-label" style="width:auto">交易笔数</label>
+                    <div class="layui-input-inline" style="width:60px"><input type="text" name=">tran_num" class="layui-input"></div>
+                    <div class="layui-form-mid">-</div>
+                    <div class="layui-input-inline" style="width:60px"><input type="text" name="<tran_num" width="60px" class="layui-input"></div>
+
+                    <label class="layui-form-label" style="width:auto">最后交易时间</label>
+                    <div class="layui-input-inline" style="width:100px"><input class="layui-input" name=">dt_last_tran" onclick="layui.laydate({elem: this})"></div>
+                    <div class="layui-form-mid">-</div>
+                    <div class="layui-input-inline" style="width:100px"><input class="layui-input" name="<dt_last_tran" onclick="layui.laydate({elem: this})"></div>
+
+                    <div class="layui-input-inline" style="width:auto">
+                        <button class="layui-btn layui-btn-normal" lay-submit>查询</button>
+                        <button type="reset" class="layui-btn layui-btn-normal">重置</button>
+                    </div>
+                </div>
+                <div id="tplDlg1" class="layui-form" style="display:none;padding:10px">
+                    <label class="layui-form-label">标签</label>
+                    <div class="layui-input-block">
+                        <select name="tag_id" id="ctlSetTag" style="width:150px">
+                            <option value=" ">无</option>
+                        </select>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div id="dataContainer"></div>
+        <div class="page-footbar clearfix">
+            <div id="buttonBar">
+                <button class="layui-btn layui-btn-normal" type="button" onclick="layui.setTags()">批量设置标签</button>
+            </div>
+            <div id="pagingBar" class="pull-right"></div>
+        </div>
+    </div>
+</div>
+
+<script id="tplDlg" type="text/template">
+    <div id="divEdit">
+        <form class="layui-form" id="frmEdit">
+            <table class="layui-table" lay-skin="nob">
+                <tr>
+                    <td style="text-align:right">会员昵称</td>
+                    <td style="text-align:left">${name}</td>
+                </tr>
+                <tr>
+                    <td style="text-align:right">会员等级</td>
+                    <td style="text-align:left">
+                        <div class="layui-input-inline">
+                            <select name="vip" id="ctlVip">
+                                <option value=" ">无等级会员</option>
+                                <option value="1">普通会员</option>
+                                <option value="2">高级会员</option>
+                                <option value="3">VIP会员</option>
+                                <option value="4">至尊VIP会员</option>
+                            </select>
+                        </div>
+                    </td>
+                    <td style="text-align:right">交易成功笔数</td>
+                    <td style="text-align:left">${tran_num}</td>
+                </tr>
+
+                <tr>
+                    <td style="text-align:right">交易成功的金额</td>
+                    <td style="text-align:left">${tran_amt|fm_n2}</td>
+                    <td style="text-align:right">交易关闭的笔数</td>
+                    <td style="text-align:left">${refund_num}</td>
+                </tr>
+
+                <tr>
+                    <td style="text-align:right">交易关闭的金额</td>
+                    <td style="text-align:left">${refund_amt|fm_n2}</td>
+                    <td style="text-align:right">平均客单价</td>
+                    <td style="text-align:left">${tran_price|fm_n2}</td>
+                </tr>
+
+                <tr>
+                    <td style="text-align:right">最后交易时间</td>
+                    <td style="text-align:left">${dt_last_tran|fm_stime}</td>
+                    <td style="text-align:right">所在地</td>
+                    <td style="text-align:left">${area}</td>
+                </tr>
+
+                <tr>
+                    <td style="text-align:right">客户类型</td>
+                    <td style="text-align:left">${ctype}</td>
+                    <td style="text-align:right">手机号码</td>
+                    <td style="text-align:left"><div class="layui-form-item"><input type="text" name="mobile" style="width:120px" class="layui-input" value="${mobile}"></div></td>
+                </tr>
+
+                <tr>
+                    <td style="text-align:right">客户生日</td>
+                    <td style="text-align:left"><input class="layui-input" name="birth" value="${birth|fm_date}" style="width:100px" onclick="layui.laydate({elem: this})"></td>
+                    <td style="text-align:right">客户标签</td>
+                    <td style="text-align:left">
+                        <div class="layui-input-inline">
+                            <select name="tag_id" id="ctlTag">
+                                <option value=" ">无</option>
+                            </select>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <button style="display:none" lay-submit id="edtSubmit">
+        </form>
+    </div>
+</script>
+
+<script id="tplOption" type="text/template">
+    {@each tbl as row}
+    <option value="${row.id}">${row.name}</option>
+    {@/each}
+</script>
+
+<script id="dataTemplate" type="text/template">
+    <table class="base-table">
+        <thead>
+            <!-- 表头 -->
+            <tr>
+                <th>
+                    <div class="checkbox checkbox-success">
+                        <input type="checkbox" id="chkAll" />
+                        <label for="chkAll"></label>
+                    </div>
+                </th>
+                <th width="40px">序号</th>
+                <th width="240px" align="left">客户昵称</th>
+                <th>会员等级</th>
+                <th>标签</th>
+                <th>最后交易时间</th>
+                <th align="right">交易笔数</th>
+                <th align="right">交易额</th>
+                <th align="right">退货数</th>
+                <th align="right">退货金额</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            {@if loading}{# 加载中，一般在init时使用}
+            <tr>
+                <td colspan="11"><div class="table-loading">正在加载...</div></td>
+            </tr>
+            {@else if !tbl || tbl.length ==0 }{# 无数据}
+            <tr>
+                <td colspan="11"><div class="table-empty">暂无相关数据！</div></td>
+            </tr>
+            {@else}
+            {@each tbl as row}{# 这里是注释，循环生成数据行}
+            <tr>
+                <td>
+                    <div class="checkbox checkbox-success">
+                        <input type="checkbox" name="chkSel" value="${row.id}" id="chkSel${row.id}" />
+                        <label for="chkSel${row.id}"></label>
+                    </div>
+                </td>
+                <td>${row.rn}</td>
+                <td style="text-align:left">${row.name}</td>
+                <td>${row.vip_name}</td>
+                <td>${row.tag}</td>
+                <td>${row.dt_last_tran|fm_stime}</td>
+                <td style="text-align:right">${row.tran_num}</td>
+                <td style="text-align:right">${row.tran_amt|fm_n2}</td>
+                <td style="text-align:right">${row.refund_num}</td>
+                <td style="text-align:right">${row.refund_amt}</td>
+                <td><a href="javascript:void(0);" onclick="layui.editCust(${row.id})">编辑</a></td>
+            </tr>
+            {@/each}
+            {@/if}
+        </tbody>
+    </table>
+</script>
+<script>
+    layui.use(['common', 'form', 'laypage', 'laydate','dispgrid'], function () {
+        var $ = layui.jquery,
+			com = layui.common(),
+            form = layui.form(),
+            layer = layui.layer,
+            laypage = layui.laypage;
+
+        var tags, iDlg, editId;
+        com.init();
+
+        layui.editCust = function (id){
+            editId = id;
+            com.ajax({
+                action: 'get_editfields',
+                data: {billType: 'CRM_CUST', id: id, raw: 1},
+                success: function(r){
+                    var r1 = r.tbl;
+                    if(r1.tran_num > 0) {
+                        r1.tran_price = r1.tran_amt / r1.tran_num;
+                        r1.ctype = '成交客户';
+                    } else
+                        r1.ctype = '未成交客户';
+
+                    iDlg = layer.open({
+                        area: '800px',
+                        title: '会员详细信息',
+                        skin:'def-overflow',
+                        btn: ['保存', '取消'],
+                        content: juicer($('#tplDlg').html(), r1),
+                        success:function(){
+                            $("#ctlVip option[value='" + r1.vip + "']").attr("selected", true);
+
+                            $('#ctlTag').append(juicer($('#tplOption').html(), tags));
+                            $("#ctlTag option[value='" + r1.tag_id + "']").attr("selected", true);
+                            form.render('select')
+                        },
+                        yes: function(index, layero){
+                            $('#edtSubmit').trigger('click');
+                        }
+                    });
+                }
+            });
+        }
+
+        layui.setTags = function(){
+            var ids = dispGrid.getSelIds();
+            if(!ids)
+                return;
+
+            $("#ctlSetTag").val(' ');
+            form.render('select')
+
+            iDlg = layer.open({
+                type: 1,
+                skin:'def-overflow', //防止下拉框下拉时出现滚动条
+                content: $('#tplDlg1'),
+                btn: ['确定', '取消'],
+                yes: function(index, layero){
+                    var o = $("#ctlSetTag").val();
+                    o = o == ' ' ? null : parseInt(o);
+                    var tbl = [];
+                    layui.each(ids, function(idx, i){tbl.push({id:parseInt(i), tag_id:o});});
+                    com.ajax({
+                        action: 'load_dispgrid',
+                        data: {billType: 'CRM_CUST', xaction: 'update', tbl: JSON.stringify(tbl)},
+                        success: function(r){
+                            layer.close(iDlg)
+                            dispGrid.reload();
+                        }
+                    });
+                    //$('#edtSubmit').trigger('click');
+                }
+            });
+        }
+
+        var dispGrid = layui.dispgrid({
+            checkAll: true,
+            dataParams:{
+                sort: 'dt_last_tran',
+                dir: 'DESC',
+                billType: 'CRM_CUST'
+            }
+        });
+
+        dispGrid.init();
+
+        //监听提交
+        form.on('submit', function (data) {
+            if(data.form.id == "frmSearch")
+                dispGrid.reload(data.field,true);
+            else if(data.form.id == "frmEdit"){
+                var row = data.field;
+                row.id = editId;
+                layui.each(['birth', 'tag_id'], function(idx, i){
+                    if(row[i] == ' ' || row[i] == '') row[i] = null;
+                });
+
+                com.ajax({
+                    action: 'save_baseinfo',
+                    data: {billType: 'CRM_CUST', row: JSON.stringify(row)},
+                    success: function(r){
+                        layer.close(iDlg)
+                        dispGrid.reload();
+                    }
+                });
+            }
+            return false;
+        });
+
+        com.ajax({
+            action: 'get_lookup',
+            data: {table: 'CTAG'},
+            success: function(r){
+                tags = r;
+
+                var opt = juicer($('#tplOption').html(), r);
+                $('#tag_id').append(opt);
+                $('#ctlSetTag').append(opt);
+
+                form.render('select')
+            }
+        });
+    });
+</script>

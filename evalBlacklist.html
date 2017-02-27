@@ -1,0 +1,77 @@
+---
+layout:  default
+title:   评价管理-评价黑名单
+script:
+---
+<div class="page-container">
+    <div class="page-content show-border">
+        <div class="page-head show-tool">
+            <span class="str-name">评价黑名单</span>
+            <span class="str-desc">可以将部分客户添加到评价黑名单中，在自动评价时，可以过滤掉黑名单客户，给予黑名单客户指定评价或不评价</span>
+        </div>
+        <div class="page-search">
+            <form class="layui-form">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">买家昵称：</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="name" lay-verify="name" autocomplete="off" placeholder="请输入买家昵称" class="layui-input">
+                    </div>
+                    <div class="layui-input-inline">
+                        <button class="layui-btn layui-btn-normal" lay-submit="" lay-filter="search">查询</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div id="dataContainer"></div>
+        <div class="page-footbar clearfix">
+            <div id="buttonBar">
+                <button class="layui-btn layui-btn-danger" id="btn_del" type="button">批量删除</button>
+                <button class="layui-btn layui-btn-normal" id="btn_add" type="button">添加黑名单</button>
+            </div>
+            <div id="pagingBar" class="pull-right"></div>
+        </div>
+    </div>
+</div>
+<div id="editDlg" style="display:none;padding:10px;">
+    <textarea placeholder="请输入黑名单客户昵称" id="userNames" class="layui-textarea" style="width:100%;height: 260px;"></textarea>
+    <div>(可以批量录入，每行输入一个)</div>
+</div>
+<script id="dataTemplate" type="text/template">
+    <table class="base-table">
+        <thead>
+            <!-- 表头 -->
+            <tr>
+                <th><input type="checkbox" id="chkAll" /></th>
+                <th>黑名单客户昵称</th>
+                <th>黑名单类型</th>
+                <th>添加时间</th>
+                <th>添加来源</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            {@if loading}{# 加载中，一般在init时使用}
+            <tr>
+                <td colspan="6"><div class="table-loading">正在加载...</div></td>
+            </tr>
+            {@else if !tbl || tbl.length ==0 }{# 无数据}
+            <tr>
+                <td colspan="6"><div class="table-empty">暂无相关数据！</div></td>
+            </tr>
+            {@else}
+            {@each tbl as row}{# 这里是注释，循环生成数据行}
+            <tr>
+                <td><input type="checkbox" name="chkSel" value="${row.id}" /></td>
+                <td style="text-align:left">${row.name}</td>
+                <td>${row.type}</td>
+                <td>${row.date_created|fm_stime}</td>
+                <td>${row.src}</td>
+                <td><a href="javascript:void(0);" onclick="layui.delRows(${row.id})" style="color:darkgray">删除</a></td>
+            </tr>
+            {@/each}
+            {@/if}
+        </tbody>
+    </table>
+</script>
+{% assign url = page.url | split:'.' %}
+{% include script{{url.first}}_script.html %}

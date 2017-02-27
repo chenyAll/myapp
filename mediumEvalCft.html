@@ -1,0 +1,14 @@
+---
+layout:  default
+title:   订单关怀-中差评安抚
+# 自定义内容
+script:  script/orderReminder_script.html
+subName:   中差评安抚
+description:   当买家给中差评时，发送安抚短信！(淘宝规则：双方互评后才能发送短信,为了保证短信发送的及时性,请在买家确认后及时评价)
+---
+<link href="assets/css/order.sms.css?v={{site.version}}" rel="stylesheet" />
+<div class="page-container">
+    {% include order_remind_icons.html %}
+
+</div>
+{% include {{page.script}}%}

@@ -1,0 +1,47 @@
+<script>
+    layui.use(['common', 'element'], function () {
+        var com = layui.common(),
+            $ = layui.jquery,
+            el = layui.element();
+
+        com.init();
+        com.ajax({
+            action: 'getCustVip',
+            success: function (result) {
+                var m0 = 0, m1 = 0, m2 = 0, m3 = 0, m4 = 0,m_total = 0;
+
+                if (result.tbl) {
+                    for (var i = 0; i < result.tbl.length; i++) {
+                        var item = result.tbl[i];
+                        var vip = 0;
+                        if (item.vip && parseInt(item.vip) > 0)
+                            vip = parseInt(item.vip);
+
+                        if (vip == 4)
+                            m4 = item.n;
+                        else if (vip == 3)
+                            m3 = item.n;
+                        else if (vip == 2)
+                            m2 = item.n;
+                        else if (vip == 1)
+                            m1 = item.n;
+                        else
+                            m0 = item.n
+                        m_total += item.n;
+                    }
+                    el.progress("membernum4",(m4 / m_total) * 100 + '%')
+                    $('#num4').text(m4);
+                    el.progress("membernum3", (m3 / m_total) * 100 + '%')
+                    $('#num3').text(m3);
+                    el.progress("membernum2", (m2 / m_total) * 100 + '%')
+                    $('#num2').text(m2);
+                    el.progress("membernum1", (m1 / m_total) * 100 + '%')
+                    $('#num1').text(m1);
+                    el.progress("membernum0", (m0 / m_total) * 100 + '%')
+                    $('#num0').text(m0);
+                    $('#membertotalnum').text(m_total);
+                }
+            }
+        });
+    });
+</script>

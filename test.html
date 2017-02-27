@@ -1,0 +1,148 @@
+---
+layout:  default
+title:   测试页面
+script: script/test_script.html
+---
+<div class="page-container">
+    <div class="page-alert show-border">提示：设置会员等级条件必须为递增形式。请谨慎设置会员等级，一旦设置会员只升级不降级。修改会员判断条件需先关闭会员等级才能修改成功</div>
+    <div class="page-content show-border">
+        <div class="page-head show-tool">
+            <span class="str-name">客户等级划分</span>
+            <span class="str-desc">使用会员等级区分买家级别</span>
+            <div class="tool">
+                <a href="javascript:void(0);" title="设置"><i class="crm-icon crm-icon-shezhi"></i></a>
+            </div>
+        </div>
+        <div class="page-search">
+            <form class="layui-form">
+                <div class="layui-form-item">
+                    <label class="layui-form-label" style="width:auto">买家昵称/手机号</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入标题" class="layui-input">
+                    </div>
+                    <button class="layui-btn layui-btn-normal">查询</button>
+                </div>
+
+            </form>
+        </div>
+        <div id="tableContainer">
+
+        </div>
+        
+        <div class="page-footbar clearfix"><!-- 分页 -->
+            <div id="buttonBar">
+                <button class="layui-btn layui-btn-primary" type="button">批量删除</button>
+                <button class="layui-btn layui-btn-normal" type="button">添加黑名单</button>
+            </div>
+
+            <div id="pagingBar" class="pull-right"></div>
+        </div>
+    </div>
+    <div class="page-content">
+        <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+            <ul class="layui-tab-title">
+                <li class="layui-this">网站设置</li>
+                <li>用户管理</li>
+                <li>权限分配</li>
+                <li>商品管理</li>
+                <li>订单管理</li>
+            </ul>
+            <div class="layui-tab-content" style="height: 100px;">
+                <div class="layui-tab-item layui-show">内容不一样是要有，因为你可以监听tab事件（阅读下文档就是了）</div>
+                <div class="layui-tab-item">内容2</div>
+                <div class="layui-tab-item">内容3</div>
+                <div class="layui-tab-item">内容4</div>
+                <div class="layui-tab-item">内容5</div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--<table class="base-table">
+    <thead>
+        <tr>
+            <th width="240px">会员等级</th>
+            <th>满足以下条件可自动升级</th>
+            <th width="160px">&nbsp;</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>普通会员（VIP1）</td>
+            <td align="center">
+                交易额
+                <input type="text" class="layui-input input-inline" />
+                元或
+                <input type="text" class="layui-input input-inline" />
+                笔
+            </td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>高级会员（VI2）</td>
+            <td align="center">
+                交易额
+                <input type="text" class="layui-input input-inline" />
+                元或
+                <input type="text" class="layui-input input-inline" />
+                笔
+            </td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>VIP会员（VIP3）</td>
+            <td align="center">
+                交易额
+                <input type="text" class="layui-input input-inline" />
+                元或
+                <input type="text" class="layui-input input-inline" />
+                笔
+            </td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>至尊VIP会员（VIP4）</td>
+            <td align="center">
+                交易额
+                <input type="text" class="layui-input input-inline" />
+                元或
+                <input type="text" class="layui-input input-inline" />
+                笔
+            </td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>-->
+<!-- 数据模板 -->
+<script id="tableTmpl" type="text/template">
+    <table class="base-table">
+        <thead>
+            <!-- 表头 -->
+            <tr>
+                <th width="40px">序号</th>
+                <th width="240px">会员名称</th>
+                <th>会员等级</th>
+            </tr>
+        </thead>
+        {@if !tbl || tbl.length==0}
+            <tbody>
+                <tr>
+                    <td colspan="3">暂无相关数据</td>
+                </tr>
+            </tbody>
+        {@else}
+            <tbody>
+                {@each tbl as row}{# 这里是注释，循环生成数据行}
+                <tr>
+                    <td>${row.rn}</td>
+                    <td>${row.name}</td>
+                    <td>${row.vip_name}</td>
+                </tr>
+                {@/each}
+            </tbody>
+        {@/if}
+    </table>
+</script>
+{% include script/test_script.html %}
+
+
+

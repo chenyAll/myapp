@@ -1,0 +1,138 @@
+﻿<script>
+    layui.use(['common', 'form', 'laypage', 'laydate', 'dispgrid', 'element'], function () {
+        var $ = layui.jquery,
+			com = layui.common(),
+            form = layui.form(),
+            layer = layui.layer,
+            laypage = layui.laypage,
+            element = layui.element();
+
+        com.init();
+        var dispGridMember, dispGridNum, dispGridOrder, tabIndex = 0;
+        var tIndex = getQueryString('tabIndex');
+        if (tIndex && parseInt(tIndex) > 0)
+            tabIndex = parseInt(tIndex);
+
+        element.tabChange('recordtab', tabIndex);
+        LoadData(tabIndex);
+
+        //监听会员短信群发查询提交
+        form.on('submit(searchMember)', function (data) {
+            dispGridMember.reload(data.field, true);
+            return false;
+        });
+        //监听手工指定号码查询提交
+        form.on('submit(searchNum)', function (data) {
+            dispGridNum.reload(data.field, true);
+            return false;
+        });
+        //监听订单短信查询提交
+        form.on('submit(searchOrder)', function (data) {
+            dispGridOrder.reload(data.field, true);
+            return false;
+        });
+        // tab切换时显示
+        element.on('tab', function (data) {
+            tabIndex = data.index;
+            LoadData(tabIndex);
+        });
+
+        function LoadData(index) {
+            if (index == 1) {
+                if (dispGridNum) {
+                    dispGridNum.reload();
+                } else {
+                    dispGridNum = layui.dispgrid({
+                        tableSelector: '#dataContainerNum',// 数据容器
+                        pagingId: 'pagingBarNum',// 分页容器ID
+                        dataParams: {
+                            sort: 'id',
+                            dir: 'DESC',
+                            billType: 'CRM_SMS|S'
+                        }
+                    });
+                    dispGridNum.init();
+                }
+            } else if (index == 2) {
+                if (dispGridOrder) {
+                    dispGridOrder.reload();
+                } else {
+                    dispGridOrder = layui.dispgrid({
+                        tableSelector: '#dataContainerOrder',// 数据容器
+                        pagingId: 'pagingBarOrder',// 分页容器ID
+                        dataParams: {
+                            sort: 'id',
+                            dir: 'DESC',
+                            billType: 'CRM_SMS|O'
+                        },
+                        loadSuccess: function (result) {
+                            result.isOrderSms = true;
+                        }
+                    });
+                    dispGridOrder.init();
+                }
+            } else {
+                if (dispGridMember)
+                    dispGridMember.reload();
+                else {
+                    //加载会员群发记录列表
+                    dispGridMember = layui.dispgrid({
+                        tableSelector: '#dataContainerMember',// 数据容器
+                        pagingId: 'pagingBarMember',// 分页容器ID
+                        dataParams: {
+                            sort: 'id',
+                            dir: 'DESC',
+                            billType: 'CRM_SMS|H'
+                        }
+                    });
+
+                    dispGridMember.init();
+                }
+            }
+        }
+        //再次发送
+        layui.againSend = function (id) {
+            switch (tabIndex) {
+                case 1: location.href = "pointMobileSend.html?id=" + id; break;//指定号码
+                case 2: return;//订单不支持再次发送
+                default: location.href = "memberMsgSendAll.html?id=" + id; break;//会员群发
+            }
+        };
+        //查看清单
+        layui.openDetail = function (id) {
+            switch (tabIndex) {
+                case 1: location.href = "msgSendRecord_NumQD.html?id=" + id; break;
+                case 2: location.href = "msgSendRecord_OrderQD.html?id=" + id; break;
+                default: location.href = "msgSendRecord_MemberQD.html?id="+id; break;//会员群发详细清单
+            }
+        }
+        //删除任务
+        layui.delRows = function (id) {
+            var bType = '';
+            switch (tabIndex) {
+                case 1: bType = 'CRM_SMS|S'; break;//指定号码
+                case 2: bType = 'CRM_SMS|O'; break;//订单
+                default: bType = 'CRM_SMS|H'; break;//会员群发
+            }
+            layer.confirm('确认删除发送记录吗？', {
+                btn: ['确定', '取消'] //按钮
+            }, function () {
+                com.ajax({
+                    action: 'del_baseinfo',
+                    data: {
+                        billType: bType,
+                        id: id
+                    },
+                    success: function (result) {
+                        switch (tabIndex) {
+                            case 1: dispGridNum.reload(); break;//指定号码
+                            case 2: dispGridOrder.reload(); break;//订单
+                            default: dispGridMember.reload(); break;//会员群发
+                        }
+                        layer.alert('删除成功', { icon: 1 });
+                    }
+                });
+            });
+        };
+    });
+</script>

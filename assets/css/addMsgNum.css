@@ -1,0 +1,57 @@
+/*
+ 
+ * 此 css 指向 addMsgNum 短信充值*/
+.manualAdd{
+	width: 89%;
+	margin: 20px auto 0;
+}
+
+.data-table{
+	width: 100%;
+	border: 1px solid #F7F7F7;
+	border-radius: 6px;
+	margin-top: 30px;
+}
+.data-table>thead>tr{
+	height: 50px;
+	border-bottom: 1px solid #eeeeee;
+}
+.data-table>thead>tr>th{
+	padding-left: 10px;
+	text-align: center;
+}
+.data-table>tbody>tr{
+	height: 40px;
+	border-bottom: 1px solid #e1e1e1;
+}
+.data-table>tbody>tr>td{
+	padding-left: 10px;
+	text-align: center;
+}
+.data-table>tbody>tr:hover{
+	background-color: #F7F7F7;
+}
+.data-table>tbody>tr:hover a{
+	background-color: #28aa64;
+	color: #FFF;
+	
+}
+.ruled{
+	position: absolute;
+	padding: 10px;
+	border: 1px solid #eee;
+	width: 300px;
+	background-color: #FFF;
+	left: 70px;
+	top: -80px;
+	display: none;
+}
+.addPoint{
+	border: 8px solid #ccc;
+	position: absolute;
+	border-top-color: transparent;
+	border-bottom-color: transparent;
+	border-left: none;
+	left: -8px;
+	top: 90px;
+}

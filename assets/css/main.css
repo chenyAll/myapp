@@ -1,0 +1,162 @@
+﻿html,
+body,
+body.full-height-layout #wrapper,
+body.full-height-layout #page-wrapper
+{height: 100%}
+/*顶部条*/
+#layout-top{height:50px;background-color:#25AA62;}
+/*内容部分减掉顶部的50px，ie9以下版本需要使用js调整*/
+#layout-content {height:calc(100% - 50px)}
+/*侧边栏*/
+body.fixed-sidebar .static-sidebar {position: fixed;width:200px;z-index: 100;height: 100%;background: #11181D;color:#fff}
+body.fixed-sidebar .static-sidebar .nav-main {float:left;width:60px;height:100%}
+body.fixed-sidebar .static-sidebar .nav-sub {float:left;width:140px;height:100%;background-color:#323841;overflow:auto}
+body.fixed-sidebar .static-sidebar .nav-sub .wraper {padding-bottom:50px;width:130px;-webkt-transition:opacity 0.4s ease-in-out;-moz-transition:opacity 0.4s ease-in-out;-o-transition:opacity 0.4s ease-in-out;transition:opacity 0.4s linear}
+body.fixed-sidebar.sidebar-collapse .static-sidebar {width:60px}
+body.fixed-sidebar.sidebar-collapse .static-sidebar .nav-sub {width:0;}
+body.fixed-sidebar.sidebar-collapse .static-sidebar .nav-sub .wraper{opacity:0;}
+
+/*页页内容区，需减掉侧边栏的宽度*/
+#page-wrapper {margin-left:200px;height:100%;overflow:auto;background-color: #F7F7F7;}
+body.fixed-sidebar.sidebar-collapse #page-wrapper {margin-left:60px}
+/*动画(展开和关闭时的动画，需要指定给.static-sidebar、.nav-sub、#page-wrapper)*/
+.transition-ease{-webkit-transition:all 0.4s ease;-moz-transition:all 0.4s ease;-ms-transition:all 0.4s ease;-o-transition:all 0.4s ease;transition:all 0.4s ease}
+
+/*页面基本样式*/
+.page-container {padding:10px;background:#F7F7F7}
+/*页面提示，加show-border时显示边框*/
+.page-alert {padding:15px;color:#23AB66;background:#FFFFFF;border-radius:5px;border:1px solid transparent;margin-bottom:10px}
+.page-alert .crm-icon {padding-right:5px}
+/*页面内容区加show-border样式时显示边框*/
+.page-content {margin-bottom:10px;background:#FFFFFF;border-radius:5px;border:1px solid transparent}
+.page-alert.show-border,
+.page-content.show-border {border-color:#E4E7E6;-moz-box-shadow:1px 1px 1px #ECECEC;-webkit-box-shadow:1px 1px 1px #ECECEC;box-shadow:1px 1px 1px #ECECEC}
+/*页面名称、描述、设置栏*/
+.page-head {height:50px;border-bottom:1px solid #E6E6E6;margin-left:3px;margin-right:3px}
+.page-head .str-name {line-height:50px;font-size:17px;color:#3F3F3F;font-weight:600}
+.page-head .str-desc {padding-left:10px;font-size:12px;color:#9A9A9A;}
+.page-head .str-gren {padding-left: 10px;font-size: 12px;color: #25AA62}
+.page-head.show-tool {padding-right:100px}
+.page-head .tool {float:right;margin-right:-100px;text-align:right;line-height:50px}
+.page-head .tool a {margin-left:5px}
+.page-head .tool .crm-icon{color:#9B9B9B;font-size:18px/*;-webkit-transition: font-size 0.1s ease-out 0s;-moz-transition: font-size 0.1s ease-out 0s;transition: font-size 0.1s ease-out 0s*/}
+.page-head .tool a:hover .crm-icon {color:#23AB66/*font-size:20px*/}
+.page-search {padding-top:10px;margin-left:3px;margin-right:3px}
+/*表格样式*/
+.base-table{width:100%}
+.base-table thead td,
+.base-table thead th {height:50px;border-bottom:1px solid #EAEDED;padding:10px 4px}
+.base-table tbody td {border-bottom:1px solid #EBEEED;padding:10px 4px;text-align:center}
+.base-table tbody tr:last-child td{border-bottom-width:0}
+.base-table.show-signle .single-wrap {overflow:hidden}
+.base-table.show-signle .single-txt{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;width:200px}
+
+/*底部工具条，如：按钮、分页*/
+.page-footbar {margin-top:10px;margin-left:3px;margin-right:3px}
+.page-footbar #buttonBar {float:left;padding:8px 0;}
+.page-footbar #pagingBar {float:right}
+/*内容区显示边框时的处理*/
+.page-content.show-border .page-head,
+.page-content.show-border .page-search,
+.page-content.show-border .layui-tab,
+.page-content.show-border .page-footbar {margin-left:10px;margin-right:10px}
+.page-content.show-border .base-table {margin-left:3px;margin-right:3px}
+/*短信表单*/
+.sms-form {width:620px}
+/*短信详情，字数、条数等*/
+.sms-info{width:100%;margin-top:3px}
+.sms-info > div {border:1px solid #d2d2d2;padding:10px 0;border-radius:2px}
+.sms-info > div span {padding-left:15px;padding-right:30px;color:#6F6F6F}
+.sms-info > div span label {color:#FD822F}
+.sms-info > div a {color:#24AB62;display:inline-block;margin-right:10px}
+.sms-info .tip-jifei {position:relative}
+.sms-info .tip-jifei-detail{position:absolute;width:300px;height:90px;/*border:1px #25aa62 solid;*/background:#cdf6d2;top:-120px;left:-132px;font-size:12px;line-height:22px;padding:10px;display:none;border-radius:5px}
+.sms-info .tip-jifei-detail i{position:absolute;width:31px;height:16px;top:106px;left:145px;background:url(../images/icon-down.png);background-repeat:no-repeat}
+.sms-info .tip-jifei:hover .tip-jifei-detail {display:block}
+/*短信模拟器*/
+.sms-simulator{width:219px;height:410px;background:url(../images/iphone.png);background-repeat:no-repeat;overflow:hidden;position:absolute;top:-40px;right:10px}
+.sms-simulator p{width:185px;height:292px;overflow-x:hidden;overflow-y:auto;margin-left:13px;margin-top:44px;display:block;padding:5px;color:#666;font-size:13px;line-height:18px;word-wrap: break-word}
+.sms-simulator-min{width:170px;height:318px;background:url(../images/iphone-min.png);background-repeat:no-repeat;overflow:hidden;position:absolute;top:340px;left:620px}
+.sms-simulator-min p{width:143px;height:224px;overflow-x:hidden;overflow-y:auto;margin-left:10px;margin-top:35px;display:block;padding:5px;color:#666;font-size:13px;line-height:18px;word-wrap: break-word}
+
+@media only screen and (max-width: 1000px) {
+    .sms-simulator,.sms-simulator-min {display:none}
+}
+
+@media only screen and (min-width: 1200px) {
+    .sms-simulator,.sms-simulator-min {left:780px}
+}
+/*头部 下拉菜单 头部导航*/
+.dragdown{
+	position:absolute;
+	background-color: #FFF;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	box-shadow: 0 0 2px 2px #EEE;
+	color: #333;
+	overflow: hidden;
+	display: none;
+	top: 51px;
+}
+.dragdown h3{
+	height: 40px;
+	line-height: 40px;
+	border-bottom: 1px solid #333;
+	width: 200px;
+	text-indent: 2em;
+}
+.dragdown.dragdown-left{
+	left: 0;
+}
+.dragdown.dragdown-right{
+	right: 0;
+}
+/*
+ 
+ * 首页 内容  */
+.content-warp{
+	width: 96%;
+	min-width: 1000px;
+	margin: 20px auto 0;
+}
+.module-right{
+	float: right;
+	width: 300px;
+	padding-top: 10px;
+}
+.data-view-left{width: 60%;}
+.client-analyse,.pie-data{height: 232px;background-color: #FFF; border-radius: 6px;margin-bottom: 20px;}
+.brisk-client,.strip-type{height: 300px; background-color: #FFF; border-radius: 6px;}
+.brisk-client ul{
+	width: 100%;
+	height: 100%;
+}
+.brisk-client ul li{
+	float: left;
+	width: 33.33333333%;
+	height: 300px;
+}
+.data-view-right{width: 38%;}
+.top-advertisement{height: 212px ;margin-bottom: 20px;background-color: #FFF;border-radius: 6px;line-height: 212px; text-align: center;}
+.top-advertisement img{width: 100%; height: 100%;}
+.bottom-notice{height: 500px;border-radius: 6px;background-color:#FFF;}
+.notice-head{height: 34px; padding: 10px 0 16px; line-height: 34px;}
+.notice-head h3{color: #575757; font-weight: 600;text-indent: 1em;font-size: 14px;}
+.notice-head a{color: #26a963; font-size: 12px;padding-right: 16px;}
+.notice-head a:hover{text-decoration: underline;}
+.notice-menu{font-size: 12px;}
+.notice-menu li{height: 40px;line-height: 40px;}
+.notice-menu li:hover a{color: #0093F7;}
+.notice-menu li:visited a{color: green;}
+.notice-menu li:visited .notice-icon{background-image:url(../images/upLine.png) ;}
+.notice-icon{float: left;width: 40px; height: 40px; background: url(../images/onLine.png) no-repeat center;}
+.notice-url{
+	float: left;
+	width: 260px;
+	height: 100%;
+	color: #6f6f6f;
+}
+.notice-url strong{float: left; font-weight: normal;}
+
+.notice-url span{float: right;padding-right: 20px;}
+

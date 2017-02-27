@@ -1,0 +1,14 @@
+---
+layout:  default
+title:   订单关怀-回款提醒
+# 自定义内容
+script:  script/orderReminder_script.html
+subName:   回款提醒
+description:   当交易完成后，发送短信给买家。
+---
+<link href="assets/css/order.sms.css?v={{site.version}}" rel="stylesheet" />
+<div class="page-container">
+    {% include order_remind_icons.html %}
+
+</div>
+{% include {{page.script}}%}

@@ -1,0 +1,83 @@
+
+@font-face {font-family: "crm-icon";
+  src: url('iconfont.eot?t=1487920621033'); /* IE9*/
+  src: url('iconfont.eot?t=1487920621033#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('iconfont.woff?t=1487920621033') format('woff'), /* chrome, firefox */
+  url('iconfont.ttf?t=1487920621033') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+  url('iconfont.svg?t=1487920621033#crm-icon') format('svg'); /* iOS 4.1- */
+}
+
+.crm-icon {
+  font-family:"crm-icon" !important;
+  font-size:16px;
+  font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.crm-icon-refresh:before { content: "\e6aa"; }
+
+.crm-icon-selected:before { content: "\e6ae"; }
+
+.crm-icon-add:before { content: "\e6b9"; }
+
+.crm-icon-jian1:before { content: "\e61b"; }
+
+.crm-icon-gaojimoshi:before { content: "\e684"; }
+
+.crm-icon-tongzhi:before { content: "\e646"; }
+
+.crm-icon-huiyuanfuwu:before { content: "\e66e"; }
+
+.crm-icon-lipin:before { content: "\e6a2"; }
+
+.crm-icon-liwu:before { content: "\e6fd"; }
+
+.crm-icon-down:before { content: "\e8e2"; }
+
+.crm-icon-rili:before { content: "\e77e"; }
+
+.crm-icon-tuichu:before { content: "\e642"; }
+
+.crm-icon-putonghuiyuan:before { content: "\e640"; }
+
+.crm-icon-help:before { content: "\e638"; }
+
+.crm-icon-shezhi:before { content: "\e62c"; }
+
+.crm-icon-kehuguanli:before { content: "\e622"; }
+
+.crm-icon-putonghuiyuanicon:before { content: "\e7a6"; }
+
+.crm-icon-zhuyi:before { content: "\e68e"; }
+
+.crm-icon-vip:before { content: "\e64f"; }
+
+.crm-icon-duanxin01:before { content: "\e632"; }
+
+.crm-icon-yuangongguanhuai:before { content: "\e630"; }
+
+.crm-icon-pingjia:before { content: "\e626"; }
+
+.crm-icon-xiazai2:before { content: "\e713"; }
+
+.crm-icon-dian:before { content: "\e66c"; }
+
+.crm-icon-jia2:before { content: "\e61d"; }
+
+.crm-icon-weibiaoti1:before { content: "\e756"; }
+
+.crm-icon-cakes:before { content: "\e6d7"; }
+
+.crm-icon-huangguan:before { content: "\e71d"; }
+
+.crm-icon-shujubaobiao:before { content: "\e71c"; }
+
+.crm-icon-shangxian:before { content: "\e695"; }
+
+.crm-icon-quxiao1:before { content: "\e6d6"; }
+
+.crm-icon-yunyingzhongxin:before { content: "\e95a"; }
+
+.crm-icon-shouye:before { content: "\e612"; }
+

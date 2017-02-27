@@ -1,0 +1,50 @@
+<script>
+    layui.use(['form', 'laypage'], function () {
+        var $ = layui.jquery,
+            form = layui.form(),
+            layer = layui.layer,
+            laypage = layui.laypage;
+
+        laypage({
+            cont: 'pagingBar',
+            pages: 100,
+            curr: 1,//location.hash.replace('#!fenye=', '') //获取hash值为fenye的当前页
+            skin:'#27aa62',
+            jump: function (obj, first) {
+                if (!first) {
+                    layer.msg('第 ' + obj.curr + ' 页');
+                }
+            }
+        });
+        //监听提交
+        form.on('submit', function (data) {
+            layer.alert(JSON.stringify(data.field), {
+                title: '最终的提交信息'
+            })
+            return false;
+        });
+
+        $.myAjax({
+            action: 'load_dispgrid',
+            data: {
+                start: 0,
+                sort: 'id',
+                dir: 'ASC',
+                billType: 'CRM_CUST',
+                forBillType: '',
+                parentId: -1,
+                incDisabled: false,
+                incChild: false,
+                recCount: -1,
+                search: '',
+                limit: 10
+            },
+            success: function (result) {
+
+                var html = juicer($('#tableTmpl').html(), result);
+                $('#tableContainer').empty().append(html);
+            }
+        });
+
+    });
+</script>

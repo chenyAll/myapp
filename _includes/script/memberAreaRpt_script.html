@@ -1,0 +1,86 @@
+<script src="assets/js/echarts.min.js?v={{site.version}}"></script>
+<script src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
+<script>
+    layui.use(['common'], function () {
+        var com = layui.common();
+        com.init();
+        com.ajax({
+            action: 'getMemberAreaRpt',
+            success: function (result) {
+                var data = [];
+                var maxNum = 0;
+                if (result && result.tbl) {
+                    for (var i = 0; i < result.tbl.length; i++) {
+                        var item = result.tbl[i];
+                        var name = item.name.replace('省', '').replace('自治区', '');
+                        switch (name) {
+                            case '宁夏回族': name = '宁夏'; break;
+                            case '新疆维吾尔': name = '新疆'; break;
+                            case '广西壮族': name = '广西'; break;
+                        }
+
+                        data.push({ name: name, value: item.n });
+                        if (item.n > maxNum)
+                            maxNum = item.n;
+                    }
+                }
+                if (maxNum == 0)
+                    maxNum = 100;
+
+                // 初始化echarts实例
+                var myChart = echarts.init(document.getElementById('chartdiv'));
+
+                // 指定图表的配置项和数据
+                var option = {
+                    tooltip: {
+                        trigger: 'item'
+                    },
+
+                    visualMap: {
+                        min: 0,
+                        max: maxNum,
+                        left: 50,
+                        top: 'bottom',
+                        text: ['高', '低'],
+                        calculable: true,
+                        itemHeight: 300,
+                        inRange: {
+                            color: ['#ffffff', '#FB480E']
+                        }
+                    },
+                    toolbox: {
+                        show: true,
+                        orient: 'vertical',
+                        left: 50,
+                        top: 100,
+                        feature: {
+                            dataView: { readOnly: false },
+                            restore: {},
+                            saveAsImage: {}
+                        }
+                    },
+                    series: [
+                        {
+                            name: '会员数',
+                            type: 'map',
+                            mapType: 'china',
+                            roam: false,
+                            label: {
+                                normal: {
+                                    show: true
+                                },
+                                emphasis: {
+                                    show: true
+                                }
+                            },
+                            data: data
+                        }
+                    ]
+                };
+
+                // 使用刚指定的配置项和数据显示图表。
+                myChart.setOption(option);
+            }
+        });
+    });
+</script>

@@ -1,0 +1,80 @@
+---
+layout:  default
+title:   评价管理-评价记录
+script:  script/EvalRecord_script.html
+---
+<div class="page-container">
+    <div class="page-alert show-border"><i class="crm-icon crm-icon-zhuyi"></i>提示：可以查看自动评价历史记录,为了提高性能,系统只保留最近一个月评价记录！</div>
+    <div class="page-content show-border">
+        <div class="page-head show-tool">
+            <span class="str-name">评价记录</span>
+            <span class="str-desc">可以查看自动评价的历史记录！(只保留最近一个月的记录)</span>
+        </div>
+        <div class="page-search">
+            <form class="layui-form">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">买家昵称：</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="ord_name" autocomplete="off" placeholder="请输入买家昵称" class="layui-input">
+                    </div>
+                    <label class="layui-form-label">订单号：</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="ord_code" autocomplete="off" placeholder="请输入订单号" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">评价时间：</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name=">date_created" placeholder="yyyy-mm-dd" autocomplete="off" class="layui-input" onclick="layui.laydate({elem: this})">
+                    </div>
+                    <div class="layui-form-mid">-</div>
+                    <div class="layui-input-inline">
+                        <input type="text" name="<date_created" placeholder="yyyy-mm-dd" autocomplete="off" class="layui-input" onclick="layui.laydate({elem: this})">
+                    </div>
+                    <div class="layui-input-inline">
+                        <button class="layui-btn layui-btn-normal" lay-submit="" lay-filter="search">查询</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div id="dataContainer"></div>
+        <div class="page-footbar clearfix">
+            <div id="pagingBar" class="pull-right"></div>
+        </div>
+    </div>
+</div>
+<script id="dataTemplate" type="text/template">
+    <table class="base-table">
+        <thead>
+            <!-- 表头 -->
+            <tr>
+                <th width="200px">买家昵称</th>
+                <th width="160px">订单号</th>
+                <th width="150px">评价时间</th>
+                <th>评价内容</th>
+            </tr>
+        </thead>
+        <tbody>
+            {@if loading}{# 加载中，一般在init时使用}
+            <tr>
+                <td colspan="4"><div class="table-loading">正在加载...</div></td>
+            </tr>
+            {@else if !tbl || tbl.length ==0 }{# 无数据}
+            <tr>
+                <td colspan="4"><div class="table-empty">暂无相关数据！</div></td>
+            </tr>
+            {@else}
+            {@each tbl as row}{# 这里是注释，循环生成数据行}
+            <tr>
+                <td style="text-align:left">${row.ord_name}</td>
+                <td>${row.ord_code}</td>
+                <td>${row.date_created|fm_stime}</td>
+                <td>${row.pj}</td>
+            </tr>
+            {@/each}
+            {@/if}
+        </tbody>
+    </table>
+</script>
+{% assign url = page.url | split:'.' %}
+{% include script{{url.first}}_script.html %}

@@ -1,0 +1,56 @@
+﻿jquery 下拉框美化组件：
+
+属性/方法	类型	默认值	说明
+customID	字符串	空	绑定 id
+customClass	字符串	空	绑定 class
+placeholder	字符串	空	占位符，同 HTML5 placeholder 属性
+prefix	字符串	空	添加前缀
+cycle	布尔值	false	键盘控制是否循环
+links	布尔值	false	跳转到链接
+linksExternal	布尔值	false	跳转到外部链接
+size	整数	0	设置高度（个数），如果你有一个很长的下拉
+tabIndex	整数	0	设置 tabindex
+onChange	函数	空	下拉框改变之后的回调函数
+
+使用方法：$("select").selectOrDie();
+
+方法：destroy，update，disable，enable
+使用：$('select').selectOrDie('update');
+
+
+例子：
+
+//添加前缀
+$('select').selectOrDie({
+    prefix: '职位：'
+});
+
+//键盘循环控制
+$('select').selectOrDie({
+    cycle: true
+});
+
+//跳转到链接
+$('select').selectOrDie({
+    links: true,
+    placeholder: '跳转到：'
+});
+
+<select class="myselect">
+    <option value="http://www.dowebok.com/">dowebok</option>
+    <option value="http://www.baidu.com/">百度</option>
+    <option value="http://weibo.com/">微博</option>
+    <option value="http://www.baidu.com/106.html">Select-or-Die</option>
+</select>
+
+//设置高度(个数)
+$('select').selectOrDie({
+    size: 5
+});
+
+//回调函数
+$('select').selectOrDie({
+    onChange: function(){
+        alert('你选择了：' + $(this).val());
+    }
+});

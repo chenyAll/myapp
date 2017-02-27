@@ -1,0 +1,14 @@
+---
+layout:  default
+title:   订单关怀-宝贝关怀
+# 自定义内容
+script:  script/orderReminder_script.html
+subName:   宝贝关怀
+description:   根据不同商品，发送不同关怀短信。
+---
+<link href="assets/css/order.sms.css?v={{site.version}}" rel="stylesheet" />
+<div class="page-container">
+    {% include order_remind_icons.html %}
+
+</div>
+{% include {{page.script}}%}

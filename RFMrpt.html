@@ -1,0 +1,104 @@
+---
+layout:  default
+title:   报表分析-RFM标准分析
+---
+<link rel="stylesheet" type="text/css" href="assets/css/common.css"/>
+<div class="page-container">
+	<div class="page-content show-border">
+		<div class="page-head">
+			<span class="str-name">RFM标准分析</span>
+			<span class="str-desc">功能描述：R(Recency)最近一次购买时间，F(Frequency)购买次数，M(Monetary)购买金额。</span>
+		</div>
+
+		<div class="clearfix" style="padding: 30px 20px;">
+			<div class="pull-left">
+				<a href="javascript:void(0);" class="theme-btn theme-btn-mid" style="width: 100px;">客户数/占比</a>
+				<a href="javascript:void(0);" class="theme-btn theme-btn-mid" style="width: 120px;">平均每次购买金额</a>
+				<a href="javascript:void(0);" class="theme-btn theme-btn-mid" style="width: 100px;">累计购买金额</a>
+			</div>
+			<div class="pull-right">
+				<span style="line-height: 30px; color: f6f6f6;">最新数据时间：<span>2017-02-03 08:30:00</span></span>
+			</div>
+		</div>
+		<div class="panel">
+			<div class="panel-content">
+				<table class="autoTable table-text-center text-gren FRMtable">
+					<colgroup>
+						<col width="14.2857%" />
+						<col width="14.2857%" />
+						<col width="14.2857%" />
+						<col width="14.2857%" />
+						<col width="14.2857%" />
+						<col width="14.2857%" />
+						<col width="14.2857%" />
+					</colgroup>
+					<tr>
+						<td class="text-block">FM模型</td>
+						<td class="text-block">F = 1(购买1次)</td>
+						<td class="text-block">F = 2(购买2次)</td>
+						<td class="text-block">F = 3(购买3次)</td>
+						<td class="text-block">F = 4(购买4次)</td>
+						<td class="text-block">F = 5(购买5次以上)</td>
+						<td class="text-block" style="border-bottom: none;">行合计</td>
+					</tr>
+					<tr>
+						<td class="text-block">R &le; 30<br/>(近30天有效交易)</td>
+						<td class="bg-gren">&le;10%</td>
+						<td>2</td>
+						<td>3</td>
+						<td>4</td>
+						<td>5</td>
+						<td class="text-block" style="border-bottom: none;">29999995.31元<br/>占比2.11%</td>
+					</tr>
+					<tr>
+						<td class="text-block">R &le; 30<br/>(近30天有效交易)</td>
+						<td class="text-blue bg-blue">10%&le;30%</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td class="text-block" style="border-bottom: none;">29999995.31元<br/>占比2.11%</td>
+					</tr>
+					<tr>
+						<td class="text-block">R &le; 30<br/>(近30天有效交易)</td>
+						<td class="text-orange bg-orange">&ge;30%</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td class="text-block" style="border-bottom: none;">29999995.31元<br/>占比2.11%</td>
+					</tr>
+					<tr>
+						<td class="text-block">R &le; 30<br/>(近30天有效交易)</td>
+						<td class="text-orange bg-orange">&ge;30%</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td class="text-block" style="border-bottom: none;">29999995.31元<br/>占比2.11%</td>
+					</tr>
+					<tr>
+						<td class="text-block">R &le; 30<br/>(近30天有效交易)</td>
+						<td class="text-blue bg-blue">10%&le;30%</td>
+						<td>3</td>
+						<td>4</td>
+						<td>5</td>
+						<td>6</td>
+						<td class="text-block" style="border-bottom: none;">29999995.31元<br/>占比2.11%</td>
+					</tr>
+					<tr style="border-bottom: none;">
+						<td class="text-block">列合计</td>
+						<td class="text-block">5645646465元<br/>占比70.9%</td>
+						<td class="text-block">5645646465元<br/>占比70.9%</td>
+						<td class="text-block">5645646465元<br/>占比70.9%</td>
+						<td class="text-block">5645646465元<br/>占比70.9%</td>
+						<td class="text-block">5645646465元<br/>占比70.9%</td>
+						<td class="text-block">5645646465元<br/>占比70.9%</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+{% assign url = page.url | split:'.' %}
+{% include script{{url.first}}_script.html %}

@@ -1,0 +1,34 @@
+<!--用户登录-->
+<script type="text/javascript">
+    layui.use(['form','common'], function () {
+        var com = layui.common(),
+            $ = layui.jquery,
+            form = layui.form(),
+            layer = layui.layer;
+
+        //监听提交
+        form.on('submit', function (data) {
+            com.ajax({
+                action: 'login',
+                data: {
+                    org: data.field.user,
+                    user: 'admin',
+                    pwd: data.field.pwd
+                },
+                success: function (result) {
+                    var url = getQueryString('returnUrl');
+                    if (url) {
+                        location.href = url;
+                    } else {
+                        location.href = 'index.html';
+                    }
+                },
+                fail: function () {
+                    $('input[name="pwd"]').val('').focus();
+                }
+            });
+
+            return false;
+        });
+    });
+</script>

@@ -1,0 +1,127 @@
+<script src="assets/js/echarts.min.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	layui.use(['element','common'],function  () {
+		var el = layui.element();
+		var com = layui.common();
+		com.init({
+			callback:function  (res) {
+				
+			}
+		});
+		var myChart = echarts.init(document.getElementById('rptMap'));
+		 var myChart = echarts.init(document.getElementById('rptMap'));
+		option = {
+		    title: {
+		        text: '客户走势图'
+		    },
+		    tooltip : {
+		        trigger: 'axis'
+		    },
+		    legend: {
+		        data:['订单数','会员数','订单金额']
+		    },
+		    toolbox: {
+		        feature: {
+		            saveAsImage: {}
+		        }
+		    },
+		    grid: {
+		        left: '3%',
+		        right: '4%',
+		        bottom: '3%',
+		        containLabel: true
+		    },
+		    xAxis : [
+		        {
+		            type : 'category',
+		            boundaryGap : false,
+		            data : ['2017-02-15','2017-02-15','2017-02-15','2017-02-15','2017-02-15','2017-02-15'],
+		            axisLine:{
+		            	show:false
+		            },
+		            axisTick:{
+		            	show:false
+		            }
+		        }
+		    ],
+		    yAxis : [
+		        {
+		            type : 'value',
+		            axisLine:{
+		            	show:false
+		            },
+		            axisTick:{
+		            	show:false
+		            }
+		        }
+		    ],
+		    series : [
+		        {
+		            name:'新客户',
+		            type:'line',
+		            stack: '总量',
+		            lineStyle:{
+		            	normal:{
+		            		color:'#39ca74',
+		            		width:2
+		            	}
+		            },
+		            itemStyle:{
+		            	normal:{
+		            		color:'#39ca74'
+		            	}
+		            },
+		            areaStyle: {normal: {
+		            	color:'#bde5d0'
+		            }},
+		            data:[3500,1200,600,2000,300,900],
+		            smooth: true
+		            
+		        },
+		        {
+		            name:'老客户',
+		            type:'line',
+		            stack: '总量',
+		            lineStyle:{
+		            	normal:{
+		            		color:'#0093f7',
+		            		width:2
+		            	}
+		            },
+		            itemStyle:{
+		            	normal:{
+		            		color:'#0093f7'
+		            	}
+		            },
+		            areaStyle: {normal: {
+		            	color:'#d2eaff'
+		            }},
+		            data:[1500,1890,2100,3200,2510,700],
+		            smooth: true
+		        },
+		        {
+		        	name:'订单金额',
+		        	type:'line',
+		        	smooth:true,
+		        	stack:'总量',
+		        	lineStyle:{
+		        		normal:{
+		        			color:'#fc8131',
+		        			width:2
+		        		}
+		        	},
+		        	itemStyle:{
+		        		normal:{
+		        			color:'#fc8131'
+		        		}
+		        	},
+		        	data:[500,800,1900,3412,2600,1100],
+		        	areaStyle: {normal: {
+		            	color:'#d2eaff'
+		            }}
+		        }
+		    ]
+		};
+		myChart.setOption(option);
+	});
+</script>

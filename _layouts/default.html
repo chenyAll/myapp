@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="description" content="{{site.name}}:{{site.description}}"/>
+		<meta name="keywords" content="{{site.keywords}}"/>
+		<meta name="author" content="{{site.authors}}"/>
+		<title>{{site.name}} - {{page.title}}</title>
+		<link href="assets/layui/css/layui.css?v={{site.version}}" rel="stylesheet" />
+		<link href="assets/css/layui.ex.css?v={{site.version}}" rel="stylesheet" />
+		<link href="assets/css/base.css?v={{site.version}}" rel="stylesheet" />
+		<link href="assets/css/main.css?v={{site.version}}" rel="stylesheet" />
+        {% include script.html %}
+	</head>
+	<body class="full-height-layout fixed-sidebar">
+        <div id="wrapper">
+            {% include layout_top.html %}
+            <div id="layout-content">
+                {% include sidebar.html %}
+                <div id="page-wrapper" class="transition-ease">
+                    {% include content_top.html %}
+                    {{content}}
+                    {% include copyright.html %}
+                </div>
+            </div>
+        </div>
+	</body>
+</html>

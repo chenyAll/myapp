@@ -1,0 +1,46 @@
+---
+layout:  default
+title:   系统设置-手机号设置
+---
+<link rel="stylesheet" type="text/css" href="assets/css/layui.ex.css"/>
+<div class="page-container">
+	<div class="page-content show-border">
+		<div class="page-head">
+			<span class="str-name">手机号设置</span>
+			<span class="str-desc">手机号设置以后，完全接受以下信息</span>
+		</div>
+		<div class="set-option" style="padding-top: 30px;width: 80%; margin: 0 auto;">
+			<form class="layui-form">
+				<div class="layui-form-item">
+					
+						<label for="setMobile" class="layui-form-label">接收手机号:</label>
+					<div class="layui-input-inline">
+						<input type="text" name="setMobile" id="setMobile" placeholder="手机号码" class="layui-input"/>
+					</div>
+				</div>
+				<div class="layui-form-item">
+				    <label class="layui-form-label">提醒设置：</label>
+				    <div class="layui-input-inline" style="padding-top: 8px;width: 50px;">
+				      <input type="checkbox" name="" title="NO" checked>
+				      
+				    </div>
+				    <span class="layui-form-mid">短信余额不足提醒：当您的短信条数不足</span>
+				    <div class="layui-input-inline"><input type="text" class="layui-input" /></div>
+				    <span class="layui-form-mid">条时发送短信</span>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label"></label>
+					<div class="layui-input-inline" style="padding-top: 8px;width: 50px;">
+						<input type="checkbox" name="" id="" title="NO" />
+					</div>
+					<span class="layui-form-mid">软件过期提醒</span>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label"><a href="javascript:void(0);" class="layui-btn layui-btn-small layui-btn-normal" style="padding: 0 20px;">保存</a>&nbsp;&nbsp;&nbsp;</label>
+				</div>
+			</form>
+		</div>
+	</div> 
+</div>
+{% assign url = page.url | split:'.' %}
+{% include script{{url.first}}_script.html %}

@@ -1,0 +1,37 @@
+﻿/*
+* layui 样式扩展和调整
+*/
+/*复选框改小*/
+.layui-form-checkbox {height: 22px;line-height: 20px;margin:0 8px 4px 0;padding-right: 20px;}
+.layui-form-checkbox span {padding: 0 5px;font-size: 12px}
+.layui-form-checkbox i {width:30px;font-size: 18px}
+/*checkbox 恢复原有样式*/
+.restore-checkbox .layui-form-checkbox {height: 20px;padding-right:20px;line-height:18px;margin:0}
+.restore-checkbox .layui-form-checkbox span{display:none}
+.restore-checkbox .layui-form-checkbox i {position: absolute;top:1px;right:6px;width:20px;font-size: 15px}
+.restore-checkbox .layui-form-checked i,
+.restore-checkbox .layui-form-checked:hover i {color:#5FB878}
+/*输入框边框颜色*/
+.layui-input, .layui-select, .layui-textarea {border-color:#d2d2d2;padding-left:8px;padding-right:8px}
+input[type="text"]:disabled{background-color: #eaeaea}
+/*开关文字调整*/
+.layui-form-onswitch:before {content: '开';color: #fff}
+/*选项卡下*/
+.layui-tab-title {border-bottom: 1px solid #ECECEC}
+.layui-tab-brief>.layui-tab-title .layui-this {color: #27AA62}
+.layui-tab-title li {margin-right:20px}
+/**以下为扩展*************************************/
+.def-overflow .layui-layer-content{overflow:visible !important;}
+/*文本*/
+.layui-form-text{display:block;padding: 9px 0;margin-right:10px;color:#6F6F6F}
+/*突出显示*/
+.layui-form-text .prominent {background:#ECF9FC;color:#4C4C4C;padding:3px;border-radius:3px}
+.layui-form-mid.s-label,
+.layui-input-block .s-label,
+.layui-input-inline .s-label{color:#6F6F6F}
+.layui-form-mid.s-label {margin-right:5px}
+.input-inline {display:inline-block;width:auto}
+/*退订回文本域*/
+.input-sms {position:relative}
+.input-sms textarea{resize:none;min-height:140px}
+.input-sms small.tuiding {position:absolute;bottom:1px;right:1px;padding:3px 5px;border:1px solid #d2d2d2;border-bottom:none;border-right:none;background-color:#fff}

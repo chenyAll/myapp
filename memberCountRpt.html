@@ -1,0 +1,39 @@
+---
+layout:  default
+title:   运营分析-交易次数分析
+script:     script/memberCountRpt_script.html
+---
+<link href="assets/css/chart.css?v={{site.version}}" rel="stylesheet" />
+<div class="page-container">
+    <div class="page-alert  show-border">提示：按交易次数划分区间，系统将以此划分区间为您做出交易分析图表。单位：笔</div>
+    <div class="page-content show-border">
+        <div class="page-head show-tool">
+            <span class="str-name">交易次数分析</span>
+            <span class="str-desc">根据次数划分区间，统计每个区间交易会员数</span>
+        </div>
+        <div class="page-search">
+            <form class="layui-form">
+                <div class="layui-form-item">
+                    <ul class="monthPara">
+                        <li class="active">0</li>
+                        <li class="active">1</li>
+                        <li class="active">2</li>
+                        <li class="active">3</li>
+                        <li class="active">4</li>
+                        <li class="active">5</li>
+                        <li>6</li>
+                        <li>7</li>
+                        <li>8</li>
+                        <li>9</li>
+                        <li class="active">10</li>
+                    </ul>
+                    <button class="layui-btn layui-btn-normal layui-btn-small">　确定　</button>
+                </div>
+            </form>
+        </div>
+        <div id="chartdiv" style="height:500px;"></div>
+    </div>
+</div>
+{% assign url = page.url | split:'.' %}
+{% include script{{url.first}}_script.html %}
+

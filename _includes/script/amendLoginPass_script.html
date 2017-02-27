@@ -1,0 +1,57 @@
+<script type="text/javascript">
+	/*
+ 
+	 * 用户修改密码*/
+	layui.use(['common'],function  () {
+		var com = layui.common();
+		var $ = layui.jquery;
+		var layer = layui.layer;
+		com.init({
+			callback:function  (res) {
+				
+			}
+		});
+		/*
+		 
+		 * 保存修改*/
+		$('#amendBtn').on('click',function  () {		
+			var oldPwd = $('#oldPassWord').val();
+			var newPwd = $('#newPassWord').val();
+			var newPwdOk = $('#newPassWordOk').val();
+			if (newPwd == newPwdOk){
+				com.ajax({
+					action:'chpwd',
+					data:{
+						oldPwd:oldPwd,
+						newPwd:newPwdOk
+					},
+					success:function  (res) {
+						layer.confirm('保存成功',{
+							btn:'确定',
+							btn1:function  () {
+								window.location.href = 'login.html';
+							}
+						});
+						
+					}
+				});
+			}else {
+				$('#isOk').show();
+				return;
+			}
+		});
+		/*
+		 
+		 * 确认密码框 失焦的时候 验证是否 新密码一致*/
+		$('#newPassWordOk').on('blur',function  () {
+			var newPwd = $('#newPassWord').val();
+			var newPwdOk = $('#newPassWordOk').val();
+			if (newPwd == newPwdOk){
+				$('#isOk').hide();
+			}else {
+				$('#isOk').show();
+			}
+		});
+		
+	});
+</script>

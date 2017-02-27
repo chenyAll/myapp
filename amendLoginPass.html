@@ -1,0 +1,49 @@
+---
+layout:  default
+title:   系统设置-修改登录密码
+---
+<link rel="stylesheet" href="assets/css/amendLoginPass.css" />
+<div class="page-container">
+	<div class="page-content show-border">
+		<div class="page-head show-tool">
+			<span class="str-name">修改登录密码</span>
+			<div class="tool">
+				<a href="javascript:void(0);">
+					<i class="crm-icon crm-icon-shezhi"></i>
+				</a>
+			</div>
+		</div>
+		<div class="amendPassWord" style="padding-bottom: 200px;">
+			<form class="layui-form">
+				<div class="layui-form-item">
+					<label for="oldPassWord" class="layui-form-label font-wieght">原密码：</label>
+					<div class="layui-input-inline">
+						<input type="text" name="oldPassWord" id="oldPassWord" placeholder="请输入原密码" class="layui-input" />
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label for="newPassWord" class="layui-form-label font-wieght">新密码：</label>
+					<div class="layui-input-inline">
+						<input type="password" name="newPassWord" id="newPassWord" placeholder="请输入新密码" class="layui-input" />
+					</div>
+					
+				</div>
+				<div class="layui-form-item">
+					<label for="newPassWordOk" class="layui-form-label font-wieght">确认密码：</label>
+					<div class="layui-input-inline">
+						<input type="password" name="newPassWordOk" id="newPassWordOk" placeholder="再次输入新密码" class="layui-input" />
+					</div>
+					<div class="layui-form-mid layui-word-aux text-orange" id="isOk" style="display: none;">两次密码不一致</div>
+				</div>
+				<div class="layui-form-item">
+					<label for="" class="layui-form-label font-wieght"></label>
+					<div class="layui-input-inline">
+						<a href="javascirpt:;" class="layui-btn layui-btn-normal" id="amendBtn">保存</a>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+{% assign url = page.url | split:'.' %}
+{% include script{{url.first}}_script.html %}

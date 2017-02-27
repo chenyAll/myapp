@@ -1,0 +1,20 @@
+---
+layout:  default
+title:   首页
+excerpt: 亲爱的掌柜，感谢您对此款热爱与支持，为答谢您，现充值有优惠，充值越多，软件使用 时间也会延长哦
+tag: script/index_script.html
+---
+<div id="wrapper">
+	{% include layout_top.html %}
+	<div id="layout-content">
+		{% include sidebar.html %}
+		<div id="page-wrapper" class="transition-ease">
+			{% include content_top.html %}
+			<div><!--内容-->
+			
+			</div>
+		</div>
+	</div>
+</div>
+{% include script.html %}
+{% include {{page.tag}} %}

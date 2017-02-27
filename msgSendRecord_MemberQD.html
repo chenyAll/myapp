@@ -1,0 +1,75 @@
+---
+layout:  default
+title:   会员群发详细清单
+tag: script/msgSendRecordQD_script.html
+---
+<div class="page-container">
+    <div class="page-content show-border">
+        <div class="page-head show-tool">
+            <span class="str-name">会员群发详细清单</span>
+            <span class="str-desc">查看某一次短信群发任务的发送情况，注意：一个出现两条短信是因为短信内容太长，被拆分成两条短信费用计算!</span>
+        </div>
+        <div class="page-search">
+            <form class="layui-form">
+                <div class="layui-form-item">
+                    <label class="layui-form-label" style="width:auto;">买家昵称：</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="name" lay-verify="name" autocomplete="off" placeholder="请输入昵称" class="layui-input">
+                    </div>
+                    <label class="layui-form-label" style="width:auto;">手机号码：</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="mobile" autocomplete="off" placeholder="请输入手机号码" class="layui-input">
+                    </div>
+                    <div class="layui-input-inline" style="width:auto;">
+                        <button class="layui-btn layui-btn-normal" lay-submit="" lay-filter="search">查询</button>
+                        <button class="layui-btn layui-btn-normal" lay-submit="" lay-filter="back">返回到发送列表</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div id="dataContainer"></div>
+        <div class="page-footbar clearfix">
+            <div id="pagingBar" class="pull-right"></div>
+        </div>
+    </div>
+</div>
+<script id="dataTemplate" type="text/template">
+    <table class="base-table">
+        <thead>
+            <!-- 表头 -->
+            <tr>
+                <th>买家昵称</th>
+                <th>手机号码</th>
+                <th>发送时间</th>
+                <th>短信内容</th>
+                <th>短信字数/计费(条)</th>
+            </tr>
+        </thead>
+        <tbody>
+            {@if loading}{# 加载中，一般在init时使用}
+            <tr>
+                <td colspan="5"><div class="table-loading">正在加载...</div></td>
+            </tr>
+            {@else if !tbl || tbl.length ==0 }{# 无数据}
+            <tr>
+                <td colspan="5"><div class="table-empty">暂无相关数据！</div></td>
+            </tr>
+            {@else}
+            {@each tbl as row}{# 这里是注释，循环生成数据行}
+            <tr>
+                <td style="text-align:left">${row.name}</td>
+                <td>${row.mobile}</td>
+                <td>${row.dt|fm_stime}</td>
+                <td>${row.sms2}</td>
+                <td>${row.n}</td>
+            </tr>
+            {@/each}
+            {@/if}
+        </tbody>
+    </table>
+</script>
+<script type="text/javascript">
+    //会员群发详细清单
+    var billType = 'CRM_SMSD',forBillType ='CRM_SMS|H';
+</script>
+{% include {{page.tag}} %}

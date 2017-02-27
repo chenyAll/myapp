@@ -1,0 +1,16 @@
+---
+layout:  default
+title:   交易地区分析
+script: script/memberAreaRpt_script.html
+---
+<div class="page-container">
+    <div class="page-content show-border">
+        <div class="page-head show-tool">
+            <span class="str-name">交易地区分析</span>
+            <span class="str-desc">根据会员所以区域划分，显示各个地区会员数</span>
+        </div>
+        <div id="chartdiv" style="height:750px;padding:0 20px;"></div>
+    </div>
+</div>
+{% assign url = page.url | split:'.' %}
+{% include script{{url.first}}_script.html %}

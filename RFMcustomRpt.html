@@ -1,0 +1,89 @@
+---
+layout:  default
+title:   报表分析-RFM自定义分析
+---
+<div class="page-container">
+    <div class="page-content show-border">
+    	<div class="page-head">
+    		<span class="str-name">RFM自定义分析</span>
+    		<span class="str-desc">功能描述：R(Recency)最近一次购买时间，F(Frequency)购买次数，M(Monetary)购买金额。</span>
+    	</div>
+    	<div class="page-alert show-border" style="margin-top: 20px;"><span>说明：RFM数据每天会自动更新一次</span>
+    		<span class="pull-right">最新数据时间：2017-02-15 08:00:00</span>
+    	</div>
+    	<style type="text/css">
+    		.dot{
+    			font-size: 30px;
+    			height: 1px;
+    			vertical-align: middle;
+    		}
+    		#RFMautoTable{
+    			text-align: center;
+    		}
+    	</style>
+    	<table class="layui-table" lay-skin="line" id="RFMautoTable">
+    		<thead>
+    			<tr>
+    				<td>会员类型</td>
+    				<td>条件设置</td>
+    				<td>会员数</td>
+    				<td>消费金额</td>
+    				<td>客单价</td>
+    				<td>占比分析(<span class="dot text-orange crm-icon crm-icon-dian"></span>会员数<span class="dot text-blue crm-icon crm-icon-dian"></span>成交金额)</td>
+    				<td>相关操作</td>
+    			</tr>
+    		</thead>
+    		<tbody>
+    			<tr>
+    				<td>售后期客户</td>
+    				<td>R &le; 7</td>
+    				<td>769人</td>
+    				<td>5333333.55元</td>
+    				<td>69.67元</td>
+    				<td>
+    					<div style="height: 14px;line-height: 14px;">
+    						<span class="pull-left text-center text-orange" style="width: 20%;">30%</span>
+    						<div class="layui-progress pull-left" style="width: 68%;margin-top: 4px;">
+    							<div class="layui-progress-bar layui-bg-orange" lay-percent="30%"></div>
+    						</div>
+    					</div>
+    					<div style="height: 14px;line-height: 14px;">
+    						<span class="pull-left text-center text-blue" style="width: 20%;">30%</span>
+    						<div class="layui-progress pull-left" style="width: 68%;margin-top: 4px;">
+    							<div class="layui-progress-bar layui-bg-blue" lay-percent="30%"></div>
+    						</div>
+    					</div>
+    				</td>
+    				<td>
+    					<a href="javascript:void(0);" class="text-green">会员营销</a>
+    				</td>
+    			</tr>
+    			<tr>
+    				<td>售后期客户</td>
+    				<td>R &le; 7</td>
+    				<td>769人</td>
+    				<td>5333333.55元</td>
+    				<td>69.67元</td>
+    				<td>
+    					<div style="height: 14px;line-height: 14px;">
+    						<span class="pull-left text-center text-orange" style="width: 20%;">30%</span>
+    						<div class="layui-progress pull-left" style="width: 68%;margin-top: 4px;">
+    							<div class="layui-progress-bar layui-bg-orange" lay-percent="30%"></div>
+    						</div>
+    					</div>
+    					<div style="height: 14px;line-height: 14px;">
+    						<span class="pull-left text-center text-blue" style="width: 20%;">30%</span>
+    						<div class="layui-progress pull-left" style="width: 68%;margin-top: 4px;">
+    							<div class="layui-progress-bar layui-bg-blue" lay-percent="30%"></div>
+    						</div>
+    					</div>
+    				</td>
+    				<td>
+    					<a href="javascript:void(0);" class="text-green">会员营销</a>
+    				</td>
+    			</tr>
+    		
+    		</tbody>
+    	</table>
+    </div>
+</div>

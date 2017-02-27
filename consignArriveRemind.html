@@ -1,0 +1,14 @@
+---
+layout:  default
+title:   订单关怀-物流到货提醒
+# 自定义内容
+script:  script/orderReminder_script.html
+subName:   物流到货提醒
+description:   当快递到达买家所在城市时，软件会发一条短信通知买家注意查收包裹！
+---
+<link href="assets/css/order.sms.css?v={{site.version}}" rel="stylesheet" />
+<div class="page-container">
+    {% include order_remind_icons.html %}
+
+</div>
+{% include {{page.script}}%}

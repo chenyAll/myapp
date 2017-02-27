@@ -1,0 +1,35 @@
+---
+layout:  default
+title:   运营分析-交易金额分析
+script:     script/memberMoneyRpt_script.html
+---
+<link href="assets/css/chart.css?v={{site.version}}" rel="stylesheet" />
+<div class="page-container">
+    <div class="page-alert  show-border">提示：请按顺序在输入栏中依次填写合适的数字，按交易额划分区间,系统将以此划分区间为您做出交易分析图表。单位：元</div>
+    <div class="page-content show-border">
+        <div class="page-head show-tool">
+            <span class="str-name">交易金额分析</span>
+            <span class="str-desc">根据金额划分区间，统计每个区间交易会员数</span>
+        </div>
+        <div class="page-search">
+            <form class="layui-form">
+                <div class="layui-form-item">
+                    <ul class="amtul">
+                        <li style="background-color:#f7f7f7;">0</li>
+                        <li><input type="text" class="layui-input" value="10" /></li>
+                        <li><input type="text" class="layui-input" value="20" /></li>
+                        <li><input type="text" class="layui-input" value="50" /></li>
+                        <li><input type="text" class="layui-input" value="100" /></li>
+                        <li><input type="text" class="layui-input" value="500" /></li>
+                        <li class="jianbtnli"><i class="layui-icon">━</i></li>
+                        <li class="jiabtnli"><i class="layui-icon">╋</i></li>
+                    </ul>
+                    <button class="layui-btn layui-btn-normal">确定</button>
+                </div>
+            </form>
+        </div>
+        <div id="chartdiv" style="height:500px;"></div>
+    </div>
+</div>
+{% assign url = page.url | split:'.' %}
+{% include script{{url.first}}_script.html %}

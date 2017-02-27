@@ -1,0 +1,14 @@
+---
+layout:  default
+title:   订单关怀-评价关怀
+# 自定义内容
+script:  script/orderReminder_script.html
+subName:   评价关怀
+description:   当双方评价完，如果买家给予好评，将发送短信感谢，可以赠送优惠券噢！(淘宝规则：双方互评后才能发送短信)
+---
+<link href="assets/css/order.sms.css?v={{site.version}}" rel="stylesheet" />
+<div class="page-container">
+    {% include order_remind_icons.html %}
+
+</div>
+{% include {{page.script}}%}

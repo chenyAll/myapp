@@ -1,0 +1,17 @@
+﻿/*客户类页面的独立样式*/
+.mk-icons{padding:20px 30px}
+.mk-icons li {float:left;width:20%;min-width:140px;margin:10px 0;text-align:center}
+.mk-icons li span {vertical-align:middle;font-size:14px;color:#868686;padding-right:15px}
+.mk-icons li .crm-icon{height:55px;width:55px;display:inline-block;background:#D2D2D2;font-size:45px;color:#fff;border-radius:50%;text-align:center;vertical-align:middle}
+.mk-icons li.activity span {color:#333;font-weight:700}
+.mk-icons li.activity .crm-icon {background: #2EAC5D;
+background: -moz-linear-gradient(45deg, #2EAC5D 0%, #51BC45 100%);
+background: -webkit-gradient(left bottom, right top, color-stop(0%, #2EAC5D), color-stop(100%, #51BC45));
+background: -webkit-linear-gradient(45deg, #2EAC5D 0%, #51BC45 100%);
+background: -o-linear-gradient(45deg, #2EAC5D 0%, #51BC45 100%);
+background: -ms-linear-gradient(45deg, #2EAC5D 0%, #51BC45 100%);
+background: linear-gradient(45deg, #2EAC5D 0%, #51BC45 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2EAC5D', endColorstr='#51BC45', GradientType=1 );}
+.mk-icons li .crm-icon-yuangongguanhuai:before {padding-top:5px;display:inline-block}
+/*自动化营销部分设置表单选项卡*/
+.sms-form-tab {min-height:450px;position:relative}

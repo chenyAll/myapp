@@ -1,0 +1,14 @@
+---
+layout:  default
+title:   订单关怀-未付款提醒
+# 自定义内容
+script:  script/orderReminder_script.html
+subName:   未付款提醒
+description:   当客户下单后超过一定时间后，软件会自动发送短信给客户提醒客户付款，提高转化率就靠它了
+---
+<link href="assets/css/order.sms.css?v={{site.version}}" rel="stylesheet" />
+<div class="page-container">
+    {% include order_remind_icons.html %}
+
+</div>
+{% include {{page.script}}%}

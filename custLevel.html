@@ -1,0 +1,96 @@
+---
+# 陈建新
+layout:  default
+title:   客户等级划分
+script:
+---
+<link href="assets/css/customer.css" rel="stylesheet" />
+<div class="page-container">
+    <div class="page-alert show-border">提示：设置会员等级条件必须为递增形式。请谨慎设置会员等级，一旦设置会员只升级不降级。修改会员判断条件需先关闭会员等级才能修改成功</div>
+    <div class="page-content show-border">
+        <div class="page-head show-tool">
+            <span class="str-name">客户等级划分</span>
+            <span class="str-desc">使用会员等级区分买家级别</span>
+            <div class="tool">
+                <a href="javascript:void(0);" title="设置"><i class="crm-icon crm-icon-shezhi"></i></a>
+            </div>
+        </div>
+        
+        <form class="layui-form">
+            <table class="base-table layui-form" id="cust_leve">
+                <thead>
+                    <!-- 表头 -->
+                    <tr>
+                        <th width="240px">会员等级</th>
+                        <th>满足以下条件可自动升级</th>
+                        <th width="160px">&nbsp;</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- 数据 -->
+                    <tr>
+                        <td>普通会员（VIP1）</td>
+                        <td align="center">
+                            交易额
+                            <input type="text" class="layui-input input-inline" lay-verify="JYE" name="JYE" />
+                            元或
+                            <input type="text" class="layui-input input-inline" lay-verify="JYBS" name="JYBS" />
+                            笔
+                        </td>
+                        <td>
+                            <input type="checkbox" lay-submit="" name="close" lay-skin="switch" title="开关" lay-filter="vip" id="vip" class="vip">
+                            
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>高级会员（VI2）</td>
+                        <td align="center">
+                            交易额
+                            <input type="text" class="layui-input input-inline" lay-verify="JYE" name="JYE" />
+                            元或
+                            <input type="text" class="layui-input input-inline" lay-verify="JYBS" name="JYBS" />
+                            笔
+                        </td>
+                        <td>
+                            <input type="checkbox" name="close" lay-skin="switch" title="开关" lay-filter="vip" id="vip2" class="vip">
+                            
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>VIP会员（VIP3）</td>
+                        <td align="center">
+                            交易额
+                            <input type="text" class="layui-input input-inline" lay-verify="JYE" name="JYE" />
+                            元或
+                            <input type="text" class="layui-input input-inline" lay-verify="JYBS" name="JYBS" />
+                            笔
+                        </td>
+                        <td>
+                            <input type="checkbox" name="close" lay-skin="switch" title="开关" lay-filter="vip" id="vip3" class="vip">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>至尊VIP会员（VIP4）</td>
+                        <td align="center">
+                            交易额
+                            <input type="text" class="layui-input input-inline" lay-verify="JYE" name="JYE" />
+                            元或
+                            <input type="text" class="layui-input input-inline" lay-verify="JYBS" name="JYBS" />
+                            笔
+                        </td>
+                        <td>
+                            <input type="checkbox" name="close" lay-skin="switch" title="开关" lay-filter="vip" id="vip4" class="vip">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            
+        </form>
+        <div class="page-footbar clearfix"><!-- 分页 -->
+            <div id="pagingBar" class="pull-right"></div>
+        </div>
+    </div>
+
+</div>
+{% assign url = page.url | split:'.' %}
+{% include script{{url.first}}_script.html %}

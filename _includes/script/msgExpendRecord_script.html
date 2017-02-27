@@ -1,0 +1,115 @@
+<script type="text/javascript">
+	layui.use(['common','laydate','layer'],function  () {
+		var com = layui.common();
+		var $ = layui.jquery;
+		var layer = layui.layer;
+
+		com.init({
+			callback:function  (res) {
+				
+			}
+		});
+		/*
+		 
+		 * 设定 查询初始时间 和结束时间 */
+		function getTime () {
+			var newDate = new Date();
+			var endTime = newDate.format('yyyy-MM-dd');
+			newDate.addDays(-1);
+			var startTime = newDate.format('yyyy-MM-dd');
+			$('#startTime').val(startTime);
+			$('#endTime').val(endTime);
+			return {startTime:startTime,endTime:endTime};
+		}
+		
+		var types={
+			'2':'二次催付',
+			'X':'下单提醒',
+			'C':'未付款提醒',
+			'F':'付款关怀',
+			'Y':'延迟发货提醒',
+			'A':'发货提醒',
+			'D':'物流到货提醒',
+			'P':'派送提醒',
+			'Q':'签收提醒',
+			'B':'宝贝关怀',
+			'K':'回款关怀',
+			'T':'退款关怀',
+			'J':'崔评价',
+			'G':'评价关怀',
+			'Z':'中差评安抚',
+			'H':'会员短信',
+			'O':'订单短信',
+			'S':'指定号码群发',
+			'3':'中差评监控',
+			'4':'退货预警',
+			'5':'商品预警',
+			'6':'自动评价',
+			'7':'满月提醒',
+			'8':'百日提醒',
+			'9':'周年礼',
+			'0':'休眠关怀',
+			'R':'生日关怀'
+		};
+		
+		
+		juicer.register('fm_type',function(v){
+			return types[v]||'未知';
+		});
+		juicer.register('sum',function  (arr) {
+			var a = 0;
+			for (var i = 0; i<arr.length;i++){
+				a += arr[i].n
+			}
+			return a;
+		});
+		/*
+		 
+		 * 数据模版调用*/
+		function loadTemplate (data) {
+			var template = $('#dataTemplate').html();
+			var html = juicer(template,data);
+			$('#dataContainer').empty().append(html);
+		}
+		/*
+		 * 加载数据*/
+		function searchSendRecord (json) {
+			var dateJson = json || getTime();
+			
+			var d1 = dateJson.startTime;
+			var d2 = dateJson.endTime;
+			//var sendData = {};
+			//sendData.load = false; 
+			com.ajax({
+				action:'crm_sms',
+				data:{
+					d1:d1,
+					d2:d2
+				},
+				success:function  (result) {
+					loadTemplate(result);
+				}
+			});
+		}
+		searchSendRecord();
+		/*
+		 
+		 * 点击查询*/
+		$('#searchSendSum').on('click',function  () {
+			var startTime = $('#startTime').val();
+			var endTime = $('#endTime').val();
+			var dateJson = {startTime:startTime,endTime:endTime};
+			
+			var reDate = new RegExp(regexEnum.date);
+			if (startTime == '' || endTime == ''){
+				layer.alert('时间格式有误',{
+					icon:2
+				});
+			}else if ( reDate.test(startTime) && reDate.test(endTime) && startTime <= endTime){
+				searchSendRecord(dateJson);
+			}else {
+				layer.alert('日期格式有误',{icon:2});
+			}
+		});
+	});
+</script>

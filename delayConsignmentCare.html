@@ -1,0 +1,14 @@
+---
+layout:  default
+title:   订单关怀-延迟发货提醒
+# 自定义内容
+script:  script/orderReminder_script.html
+subName:   延迟发货提醒
+description:   当买家付款后，在您设置的时间内还没有发货进行短信安抚！
+---
+<link href="assets/css/order.sms.css?v={{site.version}}" rel="stylesheet" />
+<div class="page-container">
+    {% include order_remind_icons.html %}
+
+</div>
+{% include {{page.script}}%}

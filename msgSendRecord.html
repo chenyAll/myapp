@@ -1,0 +1,135 @@
+---
+layout:  default
+title:   营销短信-短信发送记录
+tag:     script/msgSendRecord_script.html
+---
+<div class="page-container">
+    <div class="page-content show-border">
+        <div class="page-head show-tool">
+            <span class="str-name">短信发送记录</span>
+            <span class="str-desc">可以查看短信任务记录，可以查看发送详细清单，支持一键补发！</span>
+        </div>
+        <div class="layui-tab layui-tab-brief"  lay-filter="recordtab">
+            <ul class="layui-tab-title">
+                <li class="layui-this">会员群发记录</li>
+                <li>指定号码发送记录</li>
+                <li>订单发送记录</li>
+            </ul>
+            <div class="layui-tab-content">
+                <!-- 会员群发记录 -->
+                <div class="layui-tab-item  layui-show">
+                    <form class="layui-form">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">发送时间：</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name=">dt_send" placeholder="yyyy-mm-dd" autocomplete="off" class="layui-input" onclick="layui.laydate({elem: this})">
+                            </div>
+                            <div class="layui-form-mid">-</div>
+                            <div class="layui-input-inline">
+                                <input type="text" name="<dt_send" placeholder="yyyy-mm-dd" autocomplete="off" class="layui-input" onclick="layui.laydate({elem: this})">
+                            </div>
+                            <div class="layui-input-inline">
+                                <button type="button" class="layui-btn layui-btn-normal" lay-submit lay-filter="searchMember">查询</button>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="dataContainerMember"></div>
+                    <div class="page-footbar clearfix">
+                        <!-- 分页 -->
+                        <div id="pagingBarMember" class="pull-right"></div>
+                    </div>
+                </div>
+                <!-- 指定号码发送记录 -->
+                <div class="layui-tab-item">
+                    <form class="layui-form">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">发送时间：</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name=">dt_send" placeholder="yyyy-mm-dd" autocomplete="off" class="layui-input" onclick="layui.laydate({elem: this})">
+                            </div>
+                            <div class="layui-form-mid">-</div>
+                            <div class="layui-input-inline">
+                                <input type="text" name="<dt_send" placeholder="yyyy-mm-dd" autocomplete="off" class="layui-input" onclick="layui.laydate({elem: this})">
+                            </div>
+                            <div class="layui-input-inline">
+                                <button type="button" class="layui-btn layui-btn-normal" lay-submit lay-filter="searchNum">查询</button>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="dataContainerNum"></div>
+                    <div class="page-footbar clearfix">
+                        <!-- 分页 -->
+                        <div id="pagingBarNum" class="pull-right"></div>
+                    </div>
+                </div>
+                <!-- 订单发送记录 -->
+                <div class="layui-tab-item">
+                    <form class="layui-form">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">发送时间：</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name=">dt_send" placeholder="yyyy-mm-dd" autocomplete="off" class="layui-input" onclick="layui.laydate({elem: this})">
+                            </div>
+                            <div class="layui-form-mid">-</div>
+                            <div class="layui-input-inline">
+                                <input type="text" name="<dt_send" placeholder="yyyy-mm-dd" autocomplete="off" class="layui-input" onclick="layui.laydate({elem: this})">
+                            </div>
+                            <div class="layui-input-inline">
+                                <button type="button" class="layui-btn layui-btn-normal" lay-submit lay-filter="searchOrder">查询</button>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="dataContainerOrder"></div>
+                    <div class="page-footbar clearfix">
+                        <!-- 分页 -->
+                        <div id="pagingBarOrder" class="pull-right"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script id="dataTemplate" type="text/template">
+    <table class="base-table">
+        <thead>
+            <!-- 表头 -->
+            <tr>
+                <th style="text-align:center">发送客户总数</th>
+                <th style="text-align:center">成功客户数</th>
+                <th style="text-align:center">发送短信量</th>
+                <th style="text-align:center">发送时间</th>
+                <th style="text-align:center" width="300px">短信内容</th>
+                <th style="text-align:center">任务状态</th>
+                <th style="text-align:center">操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            {@if loading}{# 加载中，一般在init时使用}
+            <tr>
+                <td colspan="7"><div class="table-loading">正在加载...</div></td>
+            </tr>
+            {@else if !tbl || tbl.length ==0 }{# 无数据}
+            <tr>
+                <td colspan="7"><div class="table-empty">暂无相关数据！</div></td>
+            </tr>
+            {@else}
+            {@each tbl as row}{# 这里是注释，循环生成数据行}
+            <tr>
+                <td>${row.num1}</td>
+                <td>${row.num2}</td>
+                <td>${row.num_sms}</td>
+                <td>${row.dt_send|fm_stime}</td>
+                <td>${row.sms}</td>
+                <td>${row.s}</td>
+                <td><a href="javascript:void(0);" style="color:#25AA62" onclick="layui.openDetail(${row.id})" >查看清单</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                    {@if !isOrderSms}{# 这里是注释，订单发送记录不能再次发送}
+                    <a href="javascript:void(0);" style="color:#25AA62" onclick="layui.againSend(${row.id})">再次发送</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                    {@/if}
+                    <a href="javascript:void(0);" onclick="layui.delRows(${row.id})" style="color:darkgray">删除</a></td>
+            </tr>
+            {@/each}
+            {@/if}
+        </tbody>
+    </table>
+</script>
+{% include {{page.tag}} %}

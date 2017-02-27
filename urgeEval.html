@@ -1,0 +1,14 @@
+---
+layout:  default
+title:   订单关怀-催评价
+# 自定义内容
+script:  script/orderReminder_script.html
+subName:   催评价
+description:   当交易完成后，发送短信给未评价买家，提醒给好评
+---
+<link href="assets/css/order.sms.css?v={{site.version}}" rel="stylesheet" />
+<div class="page-container">
+    {% include order_remind_icons.html %}
+
+</div>
+{% include {{page.script}}%}

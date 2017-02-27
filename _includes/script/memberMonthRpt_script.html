@@ -1,0 +1,178 @@
+<script src="assets/js/echarts.min.js?v={{site.version}}"></script>
+<script>
+    layui.use(['form','common'], function () {
+        var com = layui.common(),
+            $ = layui.jquery,
+            form = layui.form(),
+            layer = layui.layer;
+        com.init();
+        //监听确定
+        form.on('submit', function (data) {
+            var para = '';
+            $('.monthPara .active').each(function (i, l) {
+                if ($(l).text() != '0')
+                    para += '|' + $(l).text();
+            });
+            if (para.length > 0) {
+                para = para.substr(1);
+                com.ajax({
+                    action: 'saveRptPara',
+                    data: {
+                        code: 'MO',
+                        v: para
+                    },
+                    success: function (result) {
+                        LoadData(para);
+                    }
+                });
+            }
+            return false;
+        });
+        //月份点击
+        $(".monthPara li").click(function () {
+            var v = $(this).text();
+            if (v != "0")
+            {
+                if ($(this).hasClass('active'))
+                    $(this).removeClass('active');
+                else
+                    $(this).addClass('active');
+            }
+        });
+
+        var para = "1|2|3|6|12";//默认
+        com.ajax({
+            action: 'getRptPara',
+            data: {
+                code: 'MO'
+            },
+            success: function (result) {
+                if (result.msg && result.msg.length > 0) {
+                    para = result.msg;
+                    var arr = para.split('|');
+                    $('.monthPara li').removeClass('active');
+                    $('.monthPara li:eq(0)').addClass('active');
+                    for (var i = 0; i < arr.length; i++) {
+                        $('.monthPara li:eq(' + arr[i] + ')').addClass('active');
+                    }
+                }
+                LoadData(para);
+            }
+        });
+
+        function LoadData(para) {
+            com.ajax({
+                action: 'crm_cust_12',
+                success: function (result) {
+                    var para_arr = para.split('|');
+                    var x_d = [];
+                    for (var j = 0; j < para_arr.length; j++) {
+                        if (j == 0)
+                            x_d.push(para_arr[0] + '月内');
+                        else
+                            x_d.push(para_arr[j - 1] + '至' + para_arr[j] + '月内');
+                    }
+
+                    var x_data = []
+                    if (result.tbl) {
+                        var arr_i = 0;
+                        var total_num = 0;
+                        for (var i = 0; i < result.tbl.length; i++) {
+                            var item = result.tbl[i];
+                            if (i < para_arr[arr_i])
+                                total_num += item.n2 || 0;
+                            else if (arr_i >= para_arr.length - 1)
+                                break;
+                            else {
+                                x_data.push(total_num);
+                                total_num = item.n2 || 0;
+                                arr_i++;
+                            }
+                        }
+                        x_data.push(total_num);//最后一个值
+                    }
+                    $("#chartdiv").empty();
+                    // 初始化echarts实例
+                    var myChart = echarts.init(document.getElementById('chartdiv'));
+
+                    // 指定图表的配置项和数据
+                    var option = {
+                        tooltip: {
+                            trigger: 'axis',
+                            axisPointer: {// 坐标轴指示器，坐标轴触发有效
+                                type: 'shadow'// 默认为直线，可选为：'line' | 'shadow'
+                            }
+                        },
+                        backgroundColor: '#FFF',
+                        legend: {
+                            data: [{ name: '会员数' }],
+                            right: '10%',
+                            textStyle: {
+                                color: '#6F6F6F',
+                                fontSize: 16
+                            }
+                        },
+                        xAxis: {
+                            data: x_d,
+                            boundaryGap: false,
+                            axisLine: {//是否显示坐标
+                                show: false
+                            },
+                            axisTick: {//是否显示刻度线
+                                show:false
+                            },
+                            axisLabel: {
+                                textStyle: {
+                                    color: '#6F6F6F',
+                                    fontSize: 16
+                                }
+                            }
+                        },
+                        yAxis: {
+                            name: '人',
+                            type: 'value',
+                            nameTextStyle: {
+                                color: '#6F6F6F',
+                                fontSize: 18
+                            },
+                            axisLabel: {
+                                textStyle: {
+                                    color: '#6F6F6F',
+                                    fontSize: 16
+                                }
+                            },
+                            axisLine: {
+                                show:false
+                            },
+                            axisTick: {//是否显示刻度线
+                                show: false
+                            }
+                        },
+                        series: [{
+                            name: '会员数',
+                            type: 'line',
+                            data: x_data,
+                            itemStyle: {
+                                normal: { color: '#0797EE' },
+                                emphasis: { color: '#0797EE' },
+                                shadowBlur: 200
+                            },
+                            lineStyle: {
+                                normal: {
+                                    color: '#0797EE'
+                                }
+                            },
+                            smooth: true,
+                            symbolSize: 10,
+                            areaStyle: { normal: {color:'#d2eaff'} }
+                        }]
+                    };
+
+                    // 使用刚指定的配置项和数据显示图表。
+                    myChart.setOption(option);
+                }
+            });
+        }
+    });
+
+</script>

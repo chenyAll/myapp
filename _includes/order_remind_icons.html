@@ -1,0 +1,95 @@
+<!-- 订单关怀图标列表 -->
+<div class="page-content show-border">
+    <div class="page-head show-tool">
+        <span class="str-name">{{page.subName}}</span>
+        <span class="str-desc">{{page.description}}</span>
+        <div class="tool">
+            <a href="javascript:void(0);" title="设置"><i class="crm-icon crm-icon-shezhi"></i></a>
+        </div>
+    </div>
+    <div class="odr-icons">
+        <ul class="clearfix">
+            <li {% if page.subName == "下单提醒" %} class="activity" {% endif %}>
+                <a href="orderRemind.html">
+                    <i class="crm-icon crm-icon-lipin"></i><br/>
+                    <span>下单提醒</span>
+                </a>
+            </li><li {% if page.subName == "未付款提醒" %} class="activity" {% endif %}>
+                <a href="noPayRemind.html">
+                    <i class="crm-icon crm-icon-lipin"></i><br />
+                    <span>未付款提醒</span>
+                </a>
+            </li><li {% if page.subName == "付款关怀" %} class="activity" {% endif %}>
+                <a href="payCare.html">
+                    <i class="crm-icon crm-icon-lipin"></i><br />
+                    <span>付款关怀</span>
+                </a>
+            </li><li {% if page.subName == "发货提醒" %} class="activity" {% endif %}>
+                <a href="ConsignmentRemind.html">
+                    <i class="crm-icon crm-icon-lipin"></i><br />
+                    <span>发货提醒</span>
+                </a>
+            </li><li {% if page.subName == "物流到货提醒" %} class="activity" {% endif %}>
+                <a href="consignArriveRemind.html">
+                    <i class="crm-icon crm-icon-lipin"></i><br />
+                    <span>物流到货提醒</span>
+                </a>
+            </li><li {% if page.subName == "签收提醒" %} class="activity" {% endif %}>
+                <a href="signRemind.html">
+                    <i class="crm-icon crm-icon-lipin"></i><br />
+                    <span>签收提醒</span>
+                </a>
+            </li><li {% if page.subName == "回款提醒" %} class="activity" {% endif %}>
+                <a href="backMoneyCare.html">
+                    <i class="crm-icon crm-icon-lipin"></i><br />
+                    <span>回款提醒</span>
+                </a>
+            </li><li {% if page.subName == "催评价" %} class="activity" {% endif %}>
+                <a href="urgeEval.html">
+                    <i class="crm-icon crm-icon-lipin"></i><br />
+                    <span>催评价</span>
+                </a>
+            </li><li {% if page.subName == "评价关怀" %} class="activity" {% endif %}>
+                <a href="evalCare.html">
+                    <i class="crm-icon crm-icon-lipin"></i><br />
+                    <span>评价关怀</span>
+                </a>
+            </li><li {% if page.subName == "中差评安抚" %} class="activity" {% endif %}>
+                <a href="mediumEvalCft.html">
+                    <i class="crm-icon crm-icon-lipin"></i><br />
+                    <span>中差评安抚</span>
+                </a>
+            </li><li {% if page.subName == "聚划算催付" %} class="activity" {% endif %}>
+                <a href="#">
+                    <i class="crm-icon crm-icon-lipin"></i><br />
+                    <span>聚划算催付</span>
+                </a>
+            </li><li {% if page.subName == "尾款催付" %} class="activity" {% endif %}>
+                <a href="#">
+                    <i class="crm-icon crm-icon-lipin"></i><br />
+                    <span>尾款催付</span>
+                </a>
+            </li><li {% if page.subName == "延迟发货提醒" %} class="activity" {% endif %}>
+                <a href="delayConsignmentCare.html">
+                    <i class="crm-icon crm-icon-lipin"></i><br />
+                    <span>延迟发货提醒</span>
+                </a>
+            </li><li {% if page.subName == "派送提醒" %} class="activity" {% endif %}>
+                <a href="sendRemind.html">
+                    <i class="crm-icon crm-icon-lipin"></i><br />
+                    <span>派送提醒</span>
+                </a>
+            </li><li {% if page.subName == "宝贝关怀" %} class="activity" {% endif %}>
+                <a href="cowryCare.html">
+                    <i class="crm-icon crm-icon-lipin"></i><br />
+                    <span>宝贝关怀</span>
+                </a>
+            </li><li {% if page.subName == "退款关怀" %} class="activity" {% endif %}>
+                <a href="retreatCare.html">
+                    <i class="crm-icon crm-icon-lipin"></i><br />
+                    <span>退款关怀</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>

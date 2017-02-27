@@ -1,0 +1,191 @@
+---
+layout:  default
+title:   自动化营销-百日礼
+script:  script/fullMoonGift_script.html
+---
+<link href="assets/css/customer.css?v={{site.version}}" rel="stylesheet" />
+<div class="page-container">
+    <div class="page-content show-border">
+        <div class="page-head show-tool">
+            <span class="str-name">自动化营销</span>
+            <span class="str-desc"></span>
+            <div class="tool">
+                <a href="javascript:void(0);" title="设置"><i class="crm-icon crm-icon-shezhi"></i></a>
+            </div>
+        </div>
+        <div class="mk-icons">
+            <ul class="clearfix">
+                <li>
+                    <a href="fullMoonGift.html">
+                        <span>满月礼</span>
+                        <i class="crm-icon crm-icon-lipin"></i>
+                    </a>
+                </li>
+                <li class="activity">
+                    <a href="hundredDayGift.html">
+                        <span>百日礼</span>
+                        <i class="crm-icon crm-icon-liwu"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="yearsGift.html">
+                        <span>周年礼</span>
+                        <i class="crm-icon crm-icon-huangguan"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="dormancyCare.html">
+                        <span>休眠关怀</span>
+                        <i class="crm-icon crm-icon-yuangongguanhuai"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="birthdayCare.html">
+                        <span>生日关怀</span>
+                        <i class="crm-icon crm-icon-cakes"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="page-alert show-border"><i class="crm-icon crm-icon-zhuyi"></i>提示：距离客户上一次购买满100天的时候，发送一条关怀短信，可了解产品使用情况，推广新产品，客户的活跃度越高，回购率就越高噢！</div>
+    <div class="page-content show-border">
+        <div class="layui-tab layui-tab-brief">
+            <ul class="layui-tab-title">
+                <li class="layui-this">满月礼设置</li>
+                <li>查看提醒记录</li>
+            </ul>
+            <div class="layui-tab-content">
+                <!-- 设置 -->
+                <div class="layui-tab-item layui-show sms-form-tab">
+                    <form class="layui-form sms-form" action="">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">是否开启：</label>
+                            <div class="layui-input-block">
+                                <input type="radio" name="enable" value="1" title="开启">
+                                <input type="radio" name="enable" value="0" title="关闭">
+                            </div>
+                        </div>
+                        <!-- {"enable":false,"id":1,"products_id":["-"],"seller_flag":"","amt1":"9999.99","amt2":"99999.99","qty1":"9","qty2":"9999","areas_id":["-","25584","25969"],"min1":1250,"sms":"【测试】余额不足"} -->
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">关怀条件：</label>
+                            <div class="layui-form-text">
+                                <span>距离上一次下单满100天发送短信</span>
+                                <span class="prominent" style="padding-left:10px">按天计算，不满100天或者超过100天不提醒</span>
+                            </div>
+                            <div class="layui-input-block">
+                                <span class="s-label">指定商品：</span>
+                                <input name="products_id" type="hidden" value="" />
+                                <a href="javascript:void(0);" name="selProducts" class="layui-btn layui-btn-primary layui-btn-mini">默认全部商品</a>
+                            </div>
+                            <div class="layui-input-block">
+                                <span class="s-label">会员等级：</span>
+                                <input type="checkbox" name="seller_flag_1" value="1" title="普通会员">
+                                <input type="checkbox" name="seller_flag_2" value="2" title="高级会员">
+                                <input type="checkbox" name="seller_flag_3" value="3" title="VIP会员">
+                                <input type="checkbox" name="seller_flag_4" value="4" title="至尊VIP会员">
+                            </div>
+                            <div class="layui-input-block restore-checkbox" style="margin-bottom:8px">
+                                <input type="checkbox" name="chkAmt" title="交易额" lay-filter="amt">
+                                <span class="s-label">当交易额满足</span>
+                                <input type="text" name="amt1" autocomplete="off" lay-verify="amt1" placeholder="￥" class="layui-input input-inline" style="width:90px" disabled>
+                                <span class="s-label">-</span>
+                                <input type="text" name="amt2" autocomplete="off" lay-verify="amt2" placeholder="￥" class="layui-input input-inline" style="width:90px" disabled>
+                                <span class="s-label">元时，发送短信</span>
+                            </div>
+                            <div class="layui-input-block restore-checkbox" style="margin-bottom:8px">
+                                <input type="checkbox" name="chkQty" title="交易量" lay-filter="qty">
+                                <span class="s-label">当交易量达到</span>
+                                <input type="text" name="qty1" autocomplete="off" class="layui-input input-inline" style="width:90px" disabled>
+                                <span class="s-label">-</span>
+                                <input type="text" name="qty2" autocomplete="off" class="layui-input input-inline" style="width:90px" disabled>
+                                <span class="s-label">笔时，发送短信</span>
+                            </div>
+                            <div class="layui-input-block restore-checkbox" style="margin-bottom:8px">
+                                <input type="checkbox" name="chkArea" title="收货地区" lay-filter="area">
+                                <span class="s-label">当收货地区在</span>
+                                <input name="areas_id" type="hidden" value="" />
+                                <input name="areas" type="text" autocomplete="off" placeholder="默认所有地区" class="layui-input input-inline" style="width:250px" readonly="readonly" disabled>
+                                <span class="s-label">范围时，发送短信</span>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">发送时间：</label>
+                            <div class="layui-form-mid s-label">每天</div>
+                            <div class="layui-input-inline" style="width:80px;margin-right:5px;">
+                                <select name="hour">
+                                    {% for i in (9..20) %}
+                                    <option value="{{i}}">{{i}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="layui-form-mid s-label">时</div>
+                            <div class="layui-input-inline" style="width:80px;margin-right:5px;">
+                                <select name="minute">
+                                    {% for i in (0..5) %}
+                                    <option value="{{i}}0">{{i}}0</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="layui-form-mid s-label">分后，执行发送</div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">屏蔽设置：</label>
+                            <div class="layui-form-text">
+                                <span style="padding-right:10px">不发送黑名单</span>
+                                <a href="blacklist.html" target="_blank" class="layui-btn layui-btn-warm layui-btn-mini">设置黑名单</a>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">短信内容：</label>
+                            <div class="layui-input-block input-sms">
+                                <textarea name="sms" placeholder="请输入短信内容" lay-verify="required" class="layui-textarea" data-default="亲爱的{收货人}，恭喜您成为本店{会员等级}，即日起，购买商品即可享受{会员折扣}优惠！欢迎您再来!"></textarea>
+                                <small class="tuiding">退订回N</small>
+                            </div>
+                            <div class="layui-input-block">
+                                {% include sms_info.html %}
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">短信签名：</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="sign" lay-verify="sign" autocomplete="off" placeholder="短信签名" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-input-block">
+                                <button name="save" type="button" class="layui-btn layui-btn-normal" lay-submit lay-filter="save" disabled>保存设置</button>
+                                <button name="test" type="button" class="layui-btn layui-btn-primary" lay-filter="test" disabled>短信测试</button>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="smsSimulator" class="sms-simulator-min"><p></p></div>
+                </div>
+                <!-- 发送记录 -->
+                <div class="layui-tab-item" style="padding-top:20px">
+                    <form class="layui-form">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">关怀时间：</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name=">dt_send" placeholder="yyyy-mm-dd" autocomplete="off" class="layui-input" onclick="layui.laydate({elem: this})">
+                            </div>
+                            <div class="layui-form-mid">-</div>
+                            <div class="layui-input-inline">
+                                <input type="text" name="<dt_send" placeholder="yyyy-mm-dd" autocomplete="off" class="layui-input" onclick="layui.laydate({elem: this})">
+                            </div>
+                            <div class="layui-input-inline">
+                                <button type="button" class="layui-btn layui-btn-normal" lay-submit lay-filter="search">查询</button>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="dataContainer"></div>
+                    <div class="page-footbar clearfix">
+                        <!-- 分页 -->
+                        <div id="pagingBar" class="pull-right"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% include {{page.script}} type="8" %}

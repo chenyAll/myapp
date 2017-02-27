@@ -1,0 +1,14 @@
+---
+layout:  default
+title:   订单关怀-发货提醒
+# 自定义内容
+script:  script/orderReminder_script.html
+subName:   发货提醒
+description:   快递发出时，自动短信提醒买家，货已发出！
+---
+<link href="assets/css/order.sms.css?v={{site.version}}" rel="stylesheet" />
+<div class="page-container">
+    {% include order_remind_icons.html %}
+
+</div>
+{% include {{page.script}}%}

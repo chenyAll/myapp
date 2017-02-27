@@ -1,0 +1,61 @@
+---
+layout:  default
+title:   系统设置-短信消耗记录
+script:
+---
+<div class="page-container">
+	<div class="page-alert show-border">提示：亲爱的卖家朋友们，为了提升订单短信的发送效率，系统将定时删除【订单关怀】</div>
+	<div class="page-content show-border">
+		<div class="page-head show-tool">
+			<span class="str-name">{% assign title = page.title | split:'-' %}{{title.last}}</span>
+			<span class="str-desc">可查看每个功能的消耗记录 ！</span>
+		</div>
+		<div style="padding-top: 20px;">
+			<form class="layui-form">
+				<div class="layui-form-item">
+					<label for="" class="layui-form-label">时间范围：</label>
+					<div class="layui-input-inline">
+						<input type="text" placeholder="yyyy-mm-dd" class="layui-input" onclick="layui.laydate({elem:this})" id="startTime" />
+					</div>
+					<span class="layui-form-mid">-</span>
+					<div class="layui-input-inline">
+						<input type="text" placeholder="yyyy-mm-dd" class="layui-input" onclick="layui.laydate({elem:this})" id="endTime" />
+					</div>
+					<button class="layui-btn layui-btn-normal" id="searchSendSum">查询</button>
+				</div>
+			</form>
+			
+			<div id="dataContainer"></div>
+			<div class="page-footbar clearfix">
+                <!-- 分页 -->
+                <div id="pagingBar" class="pull-right"></div>
+            </div>
+		</div>
+	</div>
+</div>
+<script type="text/template" id="dataTemplate">
+	<table class="layui-table">
+		<thead>
+			<tr>
+				<th>消费项目</th>
+				<th>短信发送记录</th>
+				<th>操作</th>
+			</tr>
+		</thead>
+		<tbody>
+			{@each tbl as row}
+				<tr>
+					<td>${row.type|fm_type}</td>
+					<td>${row.n}</td>
+					<td><a href="#" class="layui-btn layui-btn-normal layui-btn-mini">点击查看发送明细</a></td>
+				</tr>
+			{@/each}
+			<tr>
+				<td>合计</td>
+				<td colspan="2">${tbl | sum}</td>
+			</tr>
+		</tbody>
+	</table>
+</script>
+{% assign url = page.url | split:'.' %}
+{% include script{{url.first}}_script.html %}

@@ -1,0 +1,208 @@
+---
+layout:  default
+title:   系统设置-短信充值
+---
+<link rel="stylesheet" type="text/css" href="assets/css/addMsgNum.css"/>
+<div class="page-container">
+	<div class="page-content show-border">
+		<div class="page-head show-tool">
+			<span class="str-name">短信群发</span>
+			<span class="str-desc">可以向客户发送打折促销短信、节日关怀短信等。</span>
+			<span class="str-gren">短信常规发送时间为：早8-晚8,其他时间发送自动延迟至次日8点发送</span>
+			<div class="tool">
+				<a href="javascript:;">
+					<i class="crm-icon crm-icon-shezhi"></i>
+				</a>
+			</div>
+		</div>
+		<div class="layui-tab layui-tab-brief" lay-filter="addMsgCount">
+			<ul class="layui-tab-title">
+				<li class="layui-this">短信充值</li>
+				<li>短信充值记录</li>
+			</ul>
+			<div class="layui-tab-content">
+				<div class="layui-tab-item layui-show">
+					<div class="manualAdd">
+						<form action="" class="layui-form">
+							<div class="layui-form-item">
+								<label for="" class="layui-form-label text-strong" style="width: 100px;">自定义充值：</label>
+								<span class="layui-form-mid text-strong">充值条数</span>
+								<div class="layui-input-inline" style="width: 100px;">
+									<input type="text" name="" id="countMsg" class="layui-input" />
+								</div>
+								<span class="layui-form-mid text-strong">条&nbsp;或&nbsp;充值金额</span>
+								<div class="layui-input-inline" style="width: 100px;">
+									<input type="text" name="" id="priceMsg" class="layui-input" />
+								</div>
+								<span class="layui-form-mid text-strong">元</span>
+								<div class="layui-form-mid" style="position: relative;">
+									<a href="#" class="text-blue" id="show-ruled">计费规则</a>
+									<div class="ruled" id="ruled">
+										<table class="layui-table">
+											<thead>
+												<tr>
+													<td>充值条数</td>
+													<td>单价</td>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td>1~4999条短信</td>
+													<td>0.05元/条</td>
+												</tr>
+												<tr>
+													<td>5000~9999条短信</td>
+													<td>0.048元/条</td>
+												</tr>
+												<tr>
+													<td>10000~19999条短信</td>
+													<td>0.047元/条</td>
+												</tr>
+												<tr>
+													<td>20000~49999条短信</td>
+													<td>0.046元/条</td>
+												</tr>
+												<tr>
+													<td>50000~99999条短信</td>
+													<td>0.045元/条</td>
+												</tr>
+												<tr>
+													<td>100000~199999条短信</td>
+													<td>0.043元/条</td>
+												</tr>
+												<tr>
+													<td>200000~499999条短信</td>
+													<td>0.042元/条</td>
+												</tr>
+												<tr>
+													<td>500000~999999条短信</td>
+													<td>0.041元/条</td>
+												</tr>
+												<tr>
+													<td>1000000以上</td>
+													<td>0.040元/条</td>
+												</tr>
+											</tbody>
+										</table>
+										<div class="addPoint"></div>
+									</div>
+								</div>
+									
+								
+								<a href="javascript:;" class="layui-btn layui-btn-normal pull-right">立即充值</a>
+							</div>
+						</form>
+						<table class="data-table">
+							<colgroup>
+								<col width="25%" align="center" />
+								<col width="25" align="center" />
+								<col width="25" align="center" />
+								<col width="25" align="center" />
+							</colgroup>
+							<thead>
+								<tr>
+									<th>充值项目</th>
+									<th>单价</th>
+									<th>总金额</th>
+									<th>操作</th>
+								</tr>
+								
+							</thead>
+							<tbody>
+								<tr>
+									<td>1条短信</td>
+									<td>0.05元/条</td>
+									<td>0.05元</td>
+									<td><a href="javascript:void(0);" class="theme-btn">立即充值</a></td>
+								</tr>
+								<tr>
+									<td>5000条短信</td>
+									<td>0.048元/条</td>
+									<td>240元</td>
+									<td><a href="javascript:void(0);" class="theme-btn">立即充值</a></td>
+								</tr>
+								<tr>
+									<td>10000条短信</td>
+									<td>0.047元/条</td>
+									<td>470元</td>
+									<td><a href="javascript:void(0);" class="theme-btn">立即充值</a></td>
+								</tr>
+								<tr>
+									<td>20000条短信</td>
+									<td>0.046元/条</td>
+									<td>920元</td>
+									<td><a href="javascript:void(0);" class="theme-btn">立即充值</a></td>
+								</tr>
+								<tr>
+									<td>50000条短信</td>
+									<td>0.045元/条</td>
+									<td>2250元</td>
+									<td><a href="javascript:void(0);" class="theme-btn">立即充值</a></td>
+								</tr>
+								<tr>
+									<td>100000条短信</td>
+									<td>0.043元/条</td>
+									<td>4300元</td>
+									<td><a href="javascript:void(0);" class="theme-btn">立即充值</a></td>
+								</tr>
+								<tr>
+									<td>200000条短信</td>
+									<td>0.042元/条</td>
+									<td>8400元</td>
+									<td><a href="javascript:void(0);" class="theme-btn">立即充值</a></td>
+								</tr>
+								<tr>
+									<td>500000条短信</td>
+									<td>0.041元/条</td>
+									<td>20500元</td>
+									<td><a href="javascript:void(0);" class="theme-btn">立即充值</a></td>
+								</tr>
+								<tr>
+									<td>1000000条短信</td>
+									<td>0.04元/条</td>
+									<td>40000元</td>
+									<td><a href="javascript:void(0);" class="theme-btn">立即充值</a></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="layui-tab-item">
+                    <div id="dataContainer"></div>
+                    <div class="page-footbar clearfix">
+                        <!-- 分页 -->
+                        <div id="pagingBar" class="pull-right"></div>
+                    </div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/template" id="dataTemplate">
+	<table cellspacing="0" cellpadding="0" width="1000" class="block-center layui-table">
+		<tr>
+			<th>充值时间</th>
+			<th>充值数量</th>
+			<th>充值方式</th>
+		</tr>
+		{@if loading}{# 加载中，一般在init时使用}
+            <tr>
+                <td colspan="3"><div class="table-loading">正在加载...</div></td>
+            </tr>
+        {@else if !tbl || tbl.length ==0 }{# 无数据}
+            <tr>
+                <td colspan="3"><div class="table-empty">暂无相关数据！</div></td>
+            </tr>
+        {@else}
+            {@each tbl as row}{# 有数据}
+		        <tr>
+		            <td>${row.date_created | fm_stime}</td>
+		            <td>${row.cnt}</td>
+		            <td>${row.comment | subS}</td>
+		        </tr>
+            {@/each}
+        {@/if}
+	</table>
+</script>
+{% assign url = page.url | split:'.' %}
+{% include script{{url.first}}_script.html %}

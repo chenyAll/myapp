@@ -1,0 +1,25 @@
+<script>
+    layui.use(['common', 'form', 'laypage', 'laydate', 'dispgrid'], function () {
+        var $ = layui.jquery,
+			com = layui.common(),
+            form = layui.form(),
+            layer = layui.layer,
+            laypage = layui.laypage;
+        com.init();
+
+        var dispGrid = layui.dispgrid({
+            dataParams: {
+                sort: 'id',
+                dir: 'DESC',
+                billType: 'CRM_SMS|6'
+            }
+        });
+
+        dispGrid.init();
+        //监听提交
+        form.on('submit', function (data) {
+            dispGrid.reload(data.field, true);
+            return false;
+        });
+    });
+</script>

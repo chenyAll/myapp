@@ -1,0 +1,14 @@
+---
+layout:  default
+title:   订单关怀-签收提醒
+# 自定义内容
+script:  script/orderReminder_script.html
+subName:   签收提醒
+description:   当客户签收包裹后超过一定时间仍然未确认收货，软件会自动发送短信给客户提醒客户确认收货！
+---
+<link href="assets/css/order.sms.css?v={{site.version}}" rel="stylesheet" />
+<div class="page-container">
+    {% include order_remind_icons.html %}
+
+</div>
+{% include {{page.script}}%}

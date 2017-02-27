@@ -1,0 +1,235 @@
+---
+layout:  default
+title:   短信群发-会员短信群发
+---
+<link href="assets/css/customer.css?v={{site.version}}" rel="stylesheet" />
+<div class="page-container">
+    <div class="page-content show-border">
+    	<div class="page-head show-tool">
+    		<span class="str-name">会员短信群发</span>
+    		<span class="str-desc">可以向客户发送打折促销短信、节日关怀短信等。</span>
+    		<span class="str-gren">短信常规发送时间为：早8-晚8，其他时间发送自动延迟次日8点发送</span>
+    		<div class="tool">
+    			<span class="crm-icon crm-icon-shezhi"></span>
+    		</div>
+    	</div>
+    	<div class="layui-tab layui-tab-brief">
+    		<ul class="layui-tab-title">
+    			<li class="layui-this">会员短信发送</li>
+    			<li>查看发送记录</li>
+    		</ul>
+    		<div class="layui-tab-content" style="height: 900px;">
+    			<div class="layui-tab-item layui-show sms-form-tab">
+    				<form action="" class="layui-form sms-form" style="padding-left: 6%;">
+    					<div class="layui-form-item">
+    						<label class="layui-form-label"><strong class="text-gray">群发对象：</strong></label>
+    						<div class="layui-form-mid ">
+    							<a href="javascript:void(0);" class="theme-btn">点击选择发送对象</a>
+    						</div>
+    					</div>
+    					<div class="layui-form-item">
+    						<label class="layui-form-label" style="padding-top: 14px;"><strong class="text-gray">短信通道：</strong></label>
+    						<div class="layui-form-mid ">
+    							<a href="javascript:void(0);" class="layui-btn layui-btn-primary layui-btn-small">店铺签名</a>
+    						</div>
+    						<div class="layui-form-mid ">
+    							<a href="javascript:void(0);" class="layui-btn layui-btn-primary layui-btn-small">自定义签名</a>
+    						</div>
+    					</div>
+    					<div class="layui-form-item">
+    						<label class="layui-form-label"><strong class="text-gray">短信内容：</strong></label>
+    						<div class="layui-form-mid">
+    							<span class="text-green">请在短信内容添加店铺相关信息，以免找不到店铺</span>
+    						</div>
+    					</div>
+    					<div class="layui-form-item">
+    						<label for="" class="layui-form-label"></label>
+    						<div class="layui-input-block input-sms">
+    							<textarea class="layui-textarea" style="resize: none;" placeholder="请输入短信内容"></textarea>
+    							<small class="tuiding">退订回N</small>
+    						</div>
+    					</div>
+    					<div class="layui-form-item">
+    						<label for="" class="layui-form-label"></label>
+    						<div class="layui-input-block">
+    							<div class="sms-info">
+    								<div>
+    									<span>已输入：<label name="smsLen">20</label>字(包含签名)计费：<label name="smsCount">10</label>条</span>
+    									<a href="javascript:void(0);" class="tip-jifei">
+    										<label>计费规则</label>
+    										<div class="tip-jifei-detail">
+    											<ol>
+    												<li>1、单条70个字,超出70个字将按照67个字每条计算</li>
+    												<li>2、一个汉字、数字、字母、空格都算一个字</li>
+    												<li>3、带标签的短信按实际发出的长度计算！</li>
+    												<li>4、签名不能大于9个字符，每次最多短信长度为500字！</li>
+    											</ol>
+    											<i></i>
+    										</div>
+    									</a>
+    								</div>
+    							</div>
+    						</div>
+    					</div>
+    					<div class="layui-form-item">
+    						<label for="" class="layui-form-label"><strong class="text-gray">辅助工具：</strong></label>
+    						<div class="layui-form-mid">
+    							<a href="javascript:void(0);" class="theme-btn">生成短网址</a>
+    						</div>
+    						<div class="layui-form-mid">
+    							<a href="javascript:void(0);" class="theme-btn">选择模版</a>
+    						</div>
+    					</div>
+    					<div class="layui-form-item">
+    						<label class="layui-form-label"><strong class="text-gray">短信签名：</strong></label>
+    						<div class="layui-form-mid">
+    							<a href="javascript:void(0);" class="theme-btn">收货人</a>
+    						</div>
+    						<div class="layui-form-mid">
+    							<span class="text-green">*标签将自动替换成客户姓名</span>
+    						</div>
+    					</div>
+    					<div class="layui-form-item">
+    						<label class="layui-form-label"><strong class="text-gray">定时发送：</strong></label>
+    						<div class="layui-input-block">
+    							<input type="radio" name="time" title="立即发送" checked="" />
+    							<input type="radio" name="time" title="定时发送" />
+    						</div>
+    					</div>
+    					<div class="layui-form-item" style="display: none;">
+    						<label for="" class="layui-form-label"></label>
+    						<div class="layui-form-mid">
+    							<span class="text-green">发送时间：</span>
+    						</div>
+    						<div class="layui-input-inline" style="width: 100px;">
+    							
+    							<input type="text" name="" id="" placeholder="yyyy-MM-dd" class="layui-input" onclick="layui.laydate({elem:this})" />
+    						</div>
+    						<div class="layui-form-mid">
+    							<span class="text-green">日：</span>
+    						</div>
+    						<div class="layui-input-inline" style="width: 60px;" id="minuteDate">
+    							<script type="text/template" id="timeData">
+									<select name="">
+								    	{@each i in range(0,24)}
+								    		<option>${i}</option>
+								    	{@/each}
+								    </select>
+								</script>
+								<script type="text/javascript">
+									var timeData = document.getElementById('timeData').innerHTML;
+									var html = juicer(timeData,24);
+									document.getElementById('minuteDate').innerHTML = html;
+								</script>
+    						</div>
+    						<div class="layui-form-mid">
+    							<span class="text-green">时：</span>
+    						</div>
+    						<div class="layui-input-inline" style="width: 60px;">
+    							<select name="second" lay-verify="required">
+    								<option value="">00</option>
+    								<option value="10">10</option>
+    								<option value="20">20</option>
+    								<option value="30">30</option>
+    								<option value="40">40</option>
+    								<option value="50">50</option>
+    							</select>
+    						</div>
+    						<div class="layui-form-mid">
+    							<span class="text-green">分</span>
+    						</div>
+    					</div>
+    					<div class="layui-form-item">
+    						<div class="layui-input-block">
+    							<a href="javascript:void(0);" class="layui-btn layui-btn-small layui-btn-normal">确定发送</a>
+    							<a href="javascript:void(0);" class="theme-btn theme-btn-mid" style="height: 26px; margin-left: 16px;">定时发送</a>
+    						</div>
+    					</div>
+    				</form>
+    				<div id="smsSimulator" class="sms-simulator-min"><p>dfsfa</p></div>
+    			</div>
+    			<div class="layui-tab-item">
+    				<div style="width: 88%; margin: 30px auto;">
+    					<form class="layui-form">
+    						<div class="layui-form-item">
+    							<div class="layui-inline">
+    								<label class="layui-form-label"><strong>发送时间：</strong></label>
+    								<div class="layui-input-inline">
+    									<input type="text" name="" id="startTime" placeholder="yyyy-MM-dd" class="layui-input" onclick="layui.laydate({elem:this})" />
+    								</div>
+    								<div class="layui-form-mid">-</div>
+    								<div class="layui-input-inline">
+    									<input type="text" name="" id="" placeholder="yyyy-MM-dd" class="layui-input" onclick="layui.laydate({elem:this})"/>
+    								</div>
+    								<div class="layui-form-mid" style="padding-top: 0; margin-left: 40px;">
+    									<a href="javascript:void(0);" class="layui-btn layui-btn-normal">查询</a>
+    								</div>
+    								
+    							</div>
+    							<div class="layui-inline" style="float: right;">
+									<div class="layui-input-inline">
+    									<select name="selectTime">
+    										<option value="">近三个月的发送记录</option>
+    									</select>
+    								</div>
+								</div>
+    						</div>
+    					</form>
+    					<style type="text/css">
+    						.layui-table tr th{
+    							text-align: center;
+    						}
+    					</style>
+    					<div class="dataContainer">
+    						<table class="layui-table" style="text-align: center;color: #6F6F6F;">
+    							<thead>
+    								<tr>
+    									<th>发送客户数</th>
+    									<th>成功客户数</th>
+    									<th>发送短信量</th>
+    									<th>发送时间</th>
+    									<th>短信内容</th>
+    									<th>任务状态</th>
+    									<th>操作</th>
+    								</tr>
+    							</thead>
+    							<tbody>
+    								<tr>
+    									<td>66655</td>
+    									<td>66</td>
+    									<td>1300</td>
+    									<td>2017-01-10 17:18:00</td>
+    									<td width="30%">不够强大，意味着很容易受到外界的影响，通常表现为：要么特别在意别人的看法，要么活在他人的眼目口舌之中。从而失去独立的判断能力，变得摇摆不定和坐立不安。
+
+　　要想成为一个内心强大的人，需要具备至少以下六大品质特征：1）高度自律和自黑；2）必须经历绝望；3）培养独处的能力；4）不设限的思考；5）需要一个信仰；6）BE YOURSELF（做自己）。</td>
+    									<td class="text-green">发送成功</td>
+    									<td>
+    										
+    									</td>
+    								</tr>
+    								<tr>
+    									<td>66655</td>
+    									<td>66</td>
+    									<td>1300</td>
+    									<td>2017-01-10 17:18:00</td>
+    									<td width="30%">不够强大，意味着很容易受到外界的影响，通常表现为：要么特别在意别人的看法，要么活在他人的眼目口舌之中。从而失去独立的判断能力，变得摇摆不定和坐立不安。
+
+　　要想成为一个内心强大的人，需要具备至少以下六大品质特征：1）高度自律和自黑；2）必须经历绝望；3）培养独处的能力；4）不设限的思考；5）需要一个信仰；6）BE YOURSELF（做自己）。</td>
+    									<td class="text-gray">发送失败</td>
+    									<td>
+    										
+    									</td>
+    								</tr>
+    							</tbody>
+    						</table>
+    					</div>
+    				</div>
+    			</div>
+    		</div>
+    	</div>
+    </div>
+</div>
+
+{% assign url = page.url | split:'.' %}
+{% include script{{url.first}}_script.html %}
+

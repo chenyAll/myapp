@@ -1,0 +1,42 @@
+<script id="dataTemplate" type="text/template">{# 短信发送记录模板1}
+    <table class="base-table show-signle">
+        <thead>
+            <tr>
+                <th style="width:100px" align="center">发送客户总数</th>
+                <th style="width:100px" align="center">成功客户数</th>
+                <th style="width:100px" align="center">发送短信量</th>
+                <th style="width:140px" align="center">发送时间</th>
+                <th>短信内容<a href="javascript:void(0)" class="crm-icon crm-icon-down"></a></th>
+                <th style="width:100px" align="center">任务状态</th>
+                <th style="width:120px" align="center">操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            {@if loading}{# 加载中，一般在init时使用}
+            <tr>
+                <td colspan="6"><div class="table-loading">正在加载...</div></td>
+            </tr>
+            {@else if !tbl || tbl.length ==0 }{# 无数据}
+            <tr>
+                <td colspan="6"><div class="table-empty">暂无相关数据！</div></td>
+            </tr>
+            {@else}
+            {@each tbl as row}{# 有数据}
+            <tr>
+                <td>${row.num1}</td>
+                <td>${row.num2}</td>
+                <td>${row.num_sms}</td>
+                <td>${row.dt_send|fm_stime}</td>
+                <td style="text-align:left">
+                    <div class="single-wrap">
+                        <div class="single-txt">${row.sms}</div>
+                    </div>
+                </td>
+                <td>${row.s}</td>
+                <td><a href="#?id=${row.id}">查看清单</a></td>
+            </tr>
+            {@/each}
+            {@/if}
+        </tbody>
+    </table>
+</script>

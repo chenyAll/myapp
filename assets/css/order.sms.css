@@ -1,0 +1,4 @@
+﻿/*订单关怀，短信群发等页面独立样式*/
+.odr-icons {}
+.odr-icons ul {margin:10px 20px}
+.odr-icons li {min-width:90px;min-height:65px;background:red;margin:10px 0;float:left;width:10%;}

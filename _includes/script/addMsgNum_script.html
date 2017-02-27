@@ -1,0 +1,145 @@
+<script type="text/javascript">
+	layui.use(['element','common','dispgrid'],function  () {
+		var el = layui.element();
+		var com = layui.common();
+		var layer = layui.layer;
+		//var dispgrid = layui.dispgrid;
+		var $ = layui.jquery;
+		com.init({
+			callback:function  (res) {
+				
+			}
+		});
+		
+		juicer.register('subS',function  (v) {
+			return v.split(':')[0];
+		});
+		/*
+		 
+		 * 加载短信充值记录*/
+		var dispGrid=null;
+		el.on('tab', function(data){
+			if(data.index==1){
+	            if (dispGrid) {
+	                dispGrid.reload();
+	            } else {
+	                dispGrid = layui.dispgrid({
+	                    dataParams: {
+	                        billType: 'CRM_CHARGE',
+	                        sort:'date_created'
+	                    }
+	                });
+	                dispGrid.init();
+	            }
+			}
+		});
+		
+		/*
+		 
+		 * 输入统计*/
+		
+		$('#countMsg').on('keyup',function  (ev) {
+			var regNumber = new RegExp(regexEnum.num1);
+			var val = parseInt($(this).val());
+			if (ev.keyCode>=48&&ev.keyCode<=57 || ev.keyCode>=96 && ev.keyCode<=105 || ev.keyCode == 8){
+				if (regNumber.test(val)){
+					if (1<=val&&val<=4999){
+						var price = val * 0.05;
+						$('#priceMsg').val(price.toFixed(2));
+					}else if (5000<=val&&val<=9999){
+						var price = val * 0.048;
+						$('#priceMsg').val(price.toFixed(2));
+					}else if (10000<=val&&val<=19999){
+						var price = val * 0.047;
+						$('#priceMsg').val(price.toFixed(2));
+					}else if (20000<=val&&val<=49999){
+						var price = val * 0.046;
+						$('#priceMsg').val(price.toFixed(2));
+					}else if (50000<=val&&val<=99999){
+						var price = val * 0.045;
+						$('#priceMsg').val(price.toFixed(2));
+					}else if (100000<=val&&val<=199999){
+						var price = val * 0.043;
+						$('#priceMsg').val(price.toFixed(2));
+					}else if (200000<=val&&val<=499999){
+						var price = val * 0.042;
+						$('#priceMsg').val(price.toFixed(2));
+					}else if (500000<=val&&val<=999999){
+						var price = val * 0.041;
+						$('#priceMsg').val(price.toFixed(2));
+					}else if (val>=1000000){
+						var price = val * 0.04;
+						$('#priceMsg').val(price.toFixed(2));
+					}
+				} else if ($(this).val()==''){
+					$('#priceMsg').val('0.00');
+					return;
+					
+				}
+			}else {
+				var val = $(this).val().split('.');
+				 $(this).val(val[0]);
+				layer.alert('请输入正确的短信条数不可以有小数点',{icon:6},function  (index) {
+					$('#countMsg').focus();
+					layer.close(index);
+				});
+				return;
+			}
+		});
+		$('#priceMsg').on('keyup',function  (ev) {
+			var regNumber = /\d+(\.{0,1}\d+)?/g;
+			var val = parseFloat($(this).val());
+			if (ev.keyCode>=48&&ev.keyCode<=57 || ev.keyCode>=96 && ev.keyCode<=105 || ev.keyCode == 8 || ev.keyCode == 110){
+				if (regNumber.test(val)){
+					if (0<=val&&val<=239){
+						var count = val / 0.05;
+						$('#countMsg').val(count.toFixed(0));
+					}else if (240<=val&&val<=469){
+						var count = val / 0.048;
+						$('#countMsg').val(count.toFixed(0));
+					}else if (470<=val&&val<=919){
+						var count = val / 0.047;
+						$('#countMsg').val(count.toFixed(0));
+					}else if (920<=val&&val<=2249){
+						var count = val / 0.046;
+						$('#countMsg').val(count.toFixed(0));
+					}else if (2250<=val&&val<=4299){
+						var count = val / 0.045;
+						$('#countMsg').val(count.toFixed(0));
+					}else if (4300<=val&&val<=8399){
+						var count = val / 0.043;
+						$('#countMsg').val(count.toFixed(0));
+					}else if (8400<=val&&val<=20499){
+						var count = val / 0.042;
+						$('#countMsg').val(count.toFixed(0));
+					}else if (20500<=val&&val<=39999){
+						var count = val / 0.041;
+						$('#countMsg').val(count.toFixed(0));
+					}else if (val>=40000){
+						var count = val / 0.04;
+						$('#countMsg').val(count.toFixed(0));
+					}
+				} else if ($(this).val()==''){
+					$('#countMsg').val('0');
+					
+				}
+			}else {
+				layer.alert('请输入正确的短信充值金额',{icon:6},function  (index) {
+					$(this).focus();
+					layer.close(index);
+				});
+				return;
+			}
+		});
+		
+		/*
+		 
+		 * 计费规则展示*/
+		$('#show-ruled').on('mouseover',function  () {
+			$('#ruled').show();
+		});
+		$('#show-ruled').on('mouseout',function  () {
+			$('#ruled').hide();
+		});
+	});
+</script>

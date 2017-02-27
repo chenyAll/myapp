@@ -1,0 +1,13 @@
+#meta data
+name:        沃淘CRM
+authors:     上海沃淘科技
+description: crm 沃淘crm 短信发送 短信营销 短信
+version:     1.0.0.1
+keywords:    "短信营销 短信 短信发送 批量发送短信 订单管理 CRM"
+#serve
+source:      .
+host:        0.0.0.0
+port:        4000
+destination: ./_site
+keep_files: [web.config, bin]
+exclude: [start.bat]

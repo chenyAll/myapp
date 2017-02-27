@@ -1,0 +1,17 @@
+<!--页角，版权等信息-->
+<div id="footCopyRight" class="footer">
+	<span>上海沃淘信息科技有限公司 &nbsp;&nbsp;版权所有©2016  &nbsp;&nbsp;全国客服电话：400-666-5168</span>
+</div>
+<script type="text/javascript">
+    layui.use('jquery', function () {
+        // 保存内容区的最小高度满屏
+        var $ = layui.jquery;
+        $(function () {
+            var $p = $('#page-wrapper');
+            var $o = $p.children('.page-container');
+            if ($o.length > 0) {
+                $o.css({ 'min-height': ($p.height() - 50) + 'px' });
+            }
+        });
+    });
+</script>

@@ -1,0 +1,31 @@
+---
+layout:  simple
+title:   用户登录
+script: script/login_script.html
+---
+<div id="wrapper">
+    <div style="width:350px;height:160px;padding:40px;border:1px solid #e5e6e7;border-radius:3px;background:rgba(255,255,255,.2);position:absolute;z-index:2;top:50%;left:50%;margin-top:-140px;margin-left:-215px">
+        <form class="layui-form">
+            <div class="layui-form-item">
+                <label class="layui-form-label">用户名</label>
+                <div class="layui-input-block">
+                    <input type="text" name="user" lay-verify="required" autocomplete="off" placeholder="请输入用户名" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">密　码</label>
+                <div class="layui-input-block">
+                    <input type="password" name="pwd" lay-verify="required" autocomplete="off" placeholder="请输入密码" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-submit="">登录</button>
+                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% assign url = page.url | split:'.' %}
+{% include script{{url.first}}_script.html %}

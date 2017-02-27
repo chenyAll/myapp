@@ -1,0 +1,14 @@
+---
+layout:  default
+title:   订单关怀-付款关怀
+# 自定义内容
+script:  script/orderReminder_script.html
+subName:   付款关怀
+description:   当买家付款时，发送短信给买家！
+---
+<link href="assets/css/order.sms.css?v={{site.version}}" rel="stylesheet" />
+<div class="page-container">
+    {% include order_remind_icons.html %}
+
+</div>
+{% include {{page.script}}%}

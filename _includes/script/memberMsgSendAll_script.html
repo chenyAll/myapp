@@ -1,0 +1,22 @@
+<script type="text/javascript">
+	layui.use(['element','form','laydate','common'],function  () {
+		
+		var el = layui.element();
+		var form = layui.form();
+		var laydate = laydate;
+		var com = layui.common();
+		var $ = layui.jquery;
+		// 初始化 用户信息
+		com.init({
+			callback:function  (result) {
+				
+			}
+		});
+		 //监听 切换事件
+		el.on('tab(filter)',function  (data) {
+			console.debug(data);
+			alert()
+		});
+		
+	});
+</script>

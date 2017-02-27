@@ -1,0 +1,134 @@
+---
+# 陈建新
+layout:  default
+title:   掌柜预警-中差评监控
+script:  script/lowerEvalLiMonitor_script.html
+---
+<link href="assets/css/customer.css?v={{site.version}}" rel="stylesheet" />
+<style type="text/css">
+    .layui-form-label {
+        width:120px;
+    }
+</style>
+<div class="page-container">
+
+    <div class="page-content show-border">
+        <div class="page-head show-tool">
+            <span class="str-name">中差评监控</span>
+            <span class="str-desc">当店铺有新的中差评时，会发送手机短信到卖家指定的手机上，只有双方互评后才会发送通知消息。请及时先给予买家评价。</span>
+            <div class="tool">
+                <a href="javascript:void(0);" title="设置"><i class="crm-icon crm-icon-shezhi"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="page-alert show-border"><i class="crm-icon crm-icon-zhuyi"></i>提示：因淘宝规则限制，需要双方互评后才可以发送预警，建议您开启"自动评价",确保中差评能够及时提醒！</div>
+    <div class="page-content show-border">
+        <div class="layui-tab layui-tab-brief">
+            <ul class="layui-tab-title">
+                <li class="layui-this">中差评监控设置</li>
+                <li>查看发送记录</li>
+            </ul>
+            <div class="layui-tab-content">
+                <!-- 设置 -->
+                <div class="layui-tab-item layui-show sms-form-tab">
+                    <form class="layui-form sms-form" action="">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">是否开启：</label>
+                            <div class="layui-input-block">
+                                <input type="radio" name="enable" value="1" title="开启">
+                                <input type="radio" name="enable" value="0" title="关闭">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">接收短信号码：</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="JSNumber" autocomplete="off" class="layui-input input-inline">
+                                <span class="s-label">，多个号码用","隔开</span>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">中差评预警：</label>
+                            <div class="layui-input-block restore-checkbox">
+                                <input type="checkbox" name="chkTX_Z" />
+                                <span class="s-label">当有中评时通知我</span>
+                            </div>
+                            <div class="layui-input-block restore-checkbox">
+                                <input type="checkbox" name="chkTX_C" />
+                                <span class="s-label">当有差评时通知我</span>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-input-block">
+                                <button name="save" type="button" class="layui-btn layui-btn-normal" lay-submit lay-filter="save" disabled>保存设置</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!-- 发送记录 -->
+                <div class="layui-tab-item" style="padding-top:20px">
+                    <form class="layui-form">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">提醒时间：</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name=">dt_send" placeholder="yyyy-mm-dd" autocomplete="off" class="layui-input" onclick="layui.laydate({elem: this})">
+                            </div>
+                            <div class="layui-form-mid">-</div>
+                            <div class="layui-input-inline">
+                                <input type="text" name="<dt_send" placeholder="yyyy-mm-dd" autocomplete="off" class="layui-input" onclick="layui.laydate({elem: this})">
+                            </div>
+                            <div class="layui-input-inline">
+                                <button type="button" class="layui-btn layui-btn-normal" lay-submit lay-filter="search">查询</button>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="dataContainer"></div>
+                    <div class="page-footbar clearfix">
+                        <!-- 分页 -->
+                        <div id="pagingBar" class="pull-right"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 数据模板 -->
+<script id="dataTemplate" type="text/template">
+    <table class="base-table show-signle">
+        <thead>
+            <tr>
+                <th>买家昵称</th>
+                <th>订单编号</th>
+                <th>评价时间</th>
+                <th>评价结果</th>
+                <th>发送时间</th>
+            </tr>
+        </thead>
+        <tbody>
+            {@if loading}{# 加载中，一般在init时使用}
+            <tr>
+                <td colspan="5"><div class="table-loading">正在加载...</div></td>
+            </tr>
+            {@else if !tbl || tbl.length ==0 }{# 无数据}
+            <tr>
+                <td colspan="5"><div class="table-empty">暂无相关数据！</div></td>
+            </tr>
+            {@else}
+            {@each tbl as row}{# 有数据}
+            <tr>
+                <td>${row.ord_name}</td>
+                <td>${row.ord_code}</td>
+                <td>${row.dt1|fm_stime}</td>
+                <td>${row.txt1}</td>
+                <td>${row.date|fm_stime}</td>
+            </tr>
+            {@/each}
+            {@/if}
+        </tbody>
+    </table>
+</script>
+<!-- 中差评监控设置 -->
+<script type="text/javascript">
+    var billType = 'CRM_ORDER_N2|3',detailBillType='CRM_SMS|3', recordId = 1;
+</script>
+{% assign url = page.url | split:'.' %}
+{% include script{{url.first}}_script.html %}

@@ -1,0 +1,48 @@
+﻿<script>
+    layui.use(['common', 'form', 'laypage', 'laydate', 'dispgrid'], function () {
+        var $ = layui.jquery,
+			com = layui.common(),
+            form = layui.form(),
+            layer = layui.layer,
+            laypage = layui.laypage;
+
+        com.init();
+        var id = getQueryString('id');
+        //加载列表
+        var dispGrid = layui.dispgrid({
+            checkAll: true,
+            dataParams: {
+                sort: 'id',
+                dir: 'DESC',
+                billType: billType,//页面上设置
+                forBillType: forBillType + ',' + id //页面上设置
+            }
+        });
+
+        dispGrid.init();
+
+        form.verify({
+            name: function (value) {
+                if (new RegExp(regexEnum.specialchar).test(value)) {
+                    return '用户名不能有特殊字符';
+                }
+            }
+        });
+        //监听查询提交
+        form.on('submit(search)', function (data) {
+            console.debug("s");
+            dispGrid.reload(data.field, true);
+            return false;
+        });
+        //返回列表
+        form.on('submit(back)', function (data) {
+            var tabIndex = 0;
+            if (forBillType == "CRM_SMS|O")
+                tabIndex = 2;
+            else if (forBillType == "CRM_SMS|S")
+                tabIndex = 1;
+            location.href = "msgSendRecord.html?tabIndex=" + tabIndex;
+            return false;
+        });
+    });
+</script>

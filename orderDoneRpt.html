@@ -1,0 +1,197 @@
+---
+layout:  default
+title:   报表分析-订单成交分析
+script:
+---
+<link rel="stylesheet" type="text/css" href="assets/css/common.css"/>
+<div class="page-container">
+	<div class="page-alert show-border"><strong>提示</strong>：通过订单成交趋势，可以直观的反应出所选时间段内订单成交趋势涨幅情况</div>
+	<div class="page-content show-border">
+		<div class="page-head show-tool">
+			<span class="str-name">订单成交分析</span>
+			<div class="tool">
+				<a href="javascript:void(0);"><span class="crm-icon crm-icon-shezhi"></span></a>
+			</div>
+		</div>
+		<style type="text/css">
+			.main-search-btn{padding:20px;}
+		</style>
+		<div class="main-search-btn clearfix">
+			<div class="pull-left">
+				<span class="text-strong">时间：</span>
+				<a href="javascript:;" class="theme-btn theme-btn-mid active">昨天</a>
+				<a href="javascript:;" class="theme-btn theme-btn-mid">近7天</a>
+				<a href="javascript:;" class="theme-btn theme-btn-mid">近15天</a>
+				<a href="javascript:;" class="theme-btn theme-btn-mid">近30天</a>
+				<a href="javascript:;" class="theme-btn theme-btn-mid">近90天</a>
+				<a href="javascript:;" class="theme-btn theme-btn-mid">近180天</a>
+				<a href="javascript:;" class="theme-btn theme-btn-mid">近360天</a>
+			</div>
+			<div class="pull-right">
+				<a href="javascript:void(0);" class="theme-btn theme-btn-mid hover-blue active">全部</a>
+				<a href="javascript:void(0);" class="theme-btn theme-btn-mid hover-blue">PC端</a>
+				<a href="javascript:void(0);" class="theme-btn theme-btn-mid hover-blue">无线端</a>
+			</div>
+		</div>
+	</div>
+	<div class="page-content show-border">
+		<div class="layui-tab layui-tab-brief" lay-filter="data-tab">
+			<ul class="layui-tab-title">
+				<li class="layui-this">基本分析</li>
+				<li>分析图展示</li>
+				<li>表格详细分析</li>
+			</ul>
+			<div class="layui-tab-content">
+				<div class="layui-tab-item layui-show">
+					<div class="panel">
+						<div class="panel-head">
+							<span class="panel-title">成交情况</span>
+						</div>
+						<div class="panel-content">
+							<table class="table-text-center autoTable text-gren">
+								<thead>
+									<tr>
+										<th>成交客户数</th>
+										<th>拍下-成交客户人数</th>
+										<th>成交笔数</th>
+										<th>成交金额</th>
+										<th>成交商品件数</th>
+										<th>客单价</th>
+										<th>拍下-成交转化率</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>6666</td>
+										<td>88888</td>
+										<td>99999</td>
+										<td>77777</td>
+										<td>5555</td>
+										<td>4444</td>
+										<td class="text-orange">80%</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<div class="panel">
+						<div class="panel-head">
+							<span class="panel-title"></span>
+						</div>
+						<div class="panel-content">
+							<table class="autoTable table-text-center text-blue">
+								<thead>
+									<tr>
+										<th>拍下客户数</th>
+										<th>拍下订单数</th>
+										<th>拍下金额</th>
+										<th>拍下商品件数</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>4689</td>
+										<td>5305</td>
+										<td>5545646.8</td>
+										<td>1888</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					
+				</div>
+				<div class="layui-tab-item">
+					<div id="rptMap" style="height: 500px;width: 1400px; margin: 0 auto;"></div>
+				</div>
+				<div class="layui-tab-item">
+					<div class="panel">
+						<div class="panel-head"><span class="panel-title">成交分析表</span></div>
+						<div class="panel-content nobg">
+							<table class="autoTable">
+								<thead>
+									<tr>
+										<th>日期</th>
+										<th>成交客户数</th>
+										<th>成交笔数</th>
+										<th>成交金额</th>
+										<th>成交商品件数</th>
+										<th>客单价</th>
+										<th>贷单价</th>
+										<th>笔单价</th>
+									</tr>
+								</thead>
+								<tbody class="addBboder">
+									<tr>
+										<td>2017-05-12</td>
+										<td>163d</td>
+										<td>1706</td>
+										<td>255556.15</td>
+										<td>5456456</td>
+										<td>9999</td>
+										<td>33333</td>
+										<td>4444</td>
+									</tr>
+									<tr>
+										<td>2017-05-12</td>
+										<td>163d</td>
+										<td>1706</td>
+										<td>255556.15</td>
+										<td>5456456</td>
+										<td>9999</td>
+										<td>33333</td>
+										<td>4444</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<div class="panel">
+						<div class="panel-head"><span class="panel-title">成交分析表</span></div>
+						<div class="panel-content nobg">
+							<table class="autoTable">
+								<thead>
+									<tr>
+										<th>日期</th>
+										<th>成交客户数</th>
+										<th>成交笔数</th>
+										<th>成交金额</th>
+										<th>成交商品件数</th>
+										<th>客单价</th>
+										<th>贷单价</th>
+										<th>笔单价</th>
+									</tr>
+								</thead>
+								<tbody class="addBboder">
+									<tr>
+										<td>2017-05-12</td>
+										<td>163d</td>
+										<td>1706</td>
+										<td>255556.15</td>
+										<td>5456456</td>
+										<td>9999</td>
+										<td>33333</td>
+										<td>4444</td>
+									</tr>
+									<tr>
+										<td>2017-05-12</td>
+										<td>163d</td>
+										<td>1706</td>
+										<td>255556.15</td>
+										<td>5456456</td>
+										<td>9999</td>
+										<td>33333</td>
+										<td>4444</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% assign url = page.url | split:'.' %}
+{% include script{{url.first}}_script.html %}

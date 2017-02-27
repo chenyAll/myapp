@@ -1,0 +1,168 @@
+---
+# 彭元兵
+layout:  default
+title:   自动化营销-生日关怀
+script:
+---
+<link href="assets/css/customer.css?v={{site.version}}" rel="stylesheet" />
+<div class="page-container">
+    <div class="page-content show-border">
+        <div class="page-head show-tool">
+            <span class="str-name">自动化营销</span>
+            <span class="str-desc"></span>
+            <div class="tool">
+                <a href="javascript:void(0);" title="设置"><i class="crm-icon crm-icon-shezhi"></i></a>
+            </div>
+        </div>
+        <div class="mk-icons">
+            <ul class="clearfix">
+                <li>
+                    <a href="fullMoonGift.html">
+                        <span>满月礼</span>
+                        <i class="crm-icon crm-icon-lipin"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="hundredDayGift.html">
+                        <span>百日礼</span>
+                        <i class="crm-icon crm-icon-liwu"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="yearsGift.html">
+                        <span>周年礼</span>
+                        <i class="crm-icon crm-icon-huangguan"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="dormancyCare.html">
+                        <span>休眠关怀</span>
+                        <i class="crm-icon crm-icon-yuangongguanhuai"></i>
+                    </a>
+                </li>
+                <li class="activity">
+                    <a href="birthdayCare.html">
+                        <span>生日关怀</span>
+                        <i class="crm-icon crm-icon-cakes"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="page-alert show-border">
+        <i class="crm-icon crm-icon-zhuyi"></i>
+        提示：给要过生日的会员发送生日祝福短信，让会员倍感温馨的同时还能提高会员的忠诚度，提高回头客。<br/>
+        <span style="padding-left:21px">*注：因生日日期是隐私数据，淘宝官方未开放需卖家自己设置，可批量导入。</span>
+    </div>
+    <div class="page-content show-border">
+        <div class="layui-tab layui-tab-brief">
+            <ul class="layui-tab-title">
+                <li class="layui-this">生日关怀设置</li>
+                <li>查看提醒记录</li>
+            </ul>
+            <div class="layui-tab-content">
+                <div class="layui-tab-item layui-show sms-form-tab">
+                    <form class="layui-form sms-form" action="">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">是否开启：</label>
+                            <div class="layui-input-block">
+                                <input type="radio" name="enable" value="1" title="开启">
+                                <input type="radio" name="enable" value="0" title="关闭">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">关怀条件：</label>
+                            <div class="layui-form-mid s-label">会员生日</div>
+                            <div class="layui-input-inline" style="width:120px">
+                                <select name="ignore_days">
+                                    <option value="0">当天</option>
+                                    <option value="1">前1天</option>
+                                    <option value="2">前2天</option>
+                                    <option value="3">前3天</option>
+                                    <option value="4">前4天</option>
+                                    <option value="7">前7天</option>
+                                    <option value="15">前15天</option>
+                                </select>
+                            </div>
+                            <div class="layui-form-mid s-label">发送短信关怀</div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">发送时间：</label>
+                            <div class="layui-form-mid s-label">每天</div>
+                            <div class="layui-input-inline" style="width:80px;margin-right:5px;">
+                                <select name="hour">
+                                    {% for i in (9..20) %}
+                                    <option value="{{i}}">{{i}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="layui-form-mid s-label">时</div>
+                            <div class="layui-input-inline" style="width:80px;margin-right:5px;">
+                                <select name="minute">
+                                    {% for i in (0..5) %}
+                                    <option value="{{i}}0">{{i}}0</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="layui-form-mid s-label">分后，执行发送</div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">屏蔽设置：</label>
+                            <div class="layui-form-text">
+                                <span style="padding-right:10px">不发送黑名单</span>
+                                <a href="blacklist.html" target="_blank" class="layui-btn layui-btn-warm layui-btn-mini">设置黑名单</a>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">短信内容：</label>
+                            <div class="layui-input-block input-sms">
+                                <textarea name="sms" placeholder="请输入短信内容" lay-verify="required" class="layui-textarea" data-default="亲爱的{收货人}，全体店小二祝您生日快乐，未来一周内在本店消费均可享受会员优惠，还可以免费领取神秘生日礼物喔！"></textarea>
+                                <small class="tuiding">退订回N</small>
+                            </div>
+                            <div class="layui-input-block">
+                                {% include sms_info.html %}
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">短信签名：</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="sign" lay-verify="sign" autocomplete="off" placeholder="短信签名" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-input-block">
+                                <button name="save" type="button" class="layui-btn layui-btn-normal" lay-submit lay-filter="save" disabled>保存设置</button>
+                                <button name="test" type="button" class="layui-btn layui-btn-primary" lay-filter="test" disabled>短信测试</button>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="smsSimulator" class="sms-simulator-min" style="top:100px"><p></p></div>
+                </div>
+                <div class="layui-tab-item" style="padding-top:20px">
+                    <form class="layui-form">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">关怀时间：</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name=">dt_send" placeholder="yyyy-mm-dd" autocomplete="off" class="layui-input" onclick="layui.laydate({elem: this})">
+                            </div>
+                            <div class="layui-form-mid">-</div>
+                            <div class="layui-input-inline">
+                                <input type="text" name="<dt_send" placeholder="yyyy-mm-dd" autocomplete="off" class="layui-input" onclick="layui.laydate({elem: this})">
+                            </div>
+                            <div class="layui-input-inline">
+                                <button type="button" class="layui-btn layui-btn-normal" lay-submit lay-filter="search">查询</button>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="dataContainer"></div>
+                    <div class="page-footbar clearfix">
+                        <!-- 分页 -->
+                        <div id="pagingBar" class="pull-right"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% assign url = page.url | split:'.' %}
+{% include script{{url.first}}_script.html %}

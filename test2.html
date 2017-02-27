@@ -1,0 +1,28 @@
+---
+layout:  testlayout
+title:   首页
+script: script/index_script.html
+---
+{% assign url = page.url | split:'.' %}
+<div>
+	page.title:{{page.title}}
+    page.url:{{url.first}}
+    {% assign aa = ['1','3','5'] %}
+    {% for item in aa %}
+    {{ item }}
+    {% endfor %}
+    <div style="padding:50px">
+        <div class="checkbox checkbox-success">
+            <input type="checkbox" id="chb" />
+            <label for="chb"></label>
+        </div>
+    </div>
+
+    <fieldset>
+        <h3>IOS 样式</h3>
+        <div>小号：<input id="iosswitch" type="checkbox" class="checkbox-ios-switch trumpet" /><label for="iosswitch"></label></div>
+        <div>默认：<input id="iosswitch2" type="checkbox" class="checkbox-ios-switch" /><label for="iosswitch2"></label></div>
+        <div>大号：<input id="iosswitch3" type="checkbox" class="checkbox-ios-switch large" /><label for="iosswitch3"></label></div>
+    </fieldset>
+</div>
+		

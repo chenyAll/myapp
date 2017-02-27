@@ -1,0 +1,151 @@
+{% include sms_list_template1.html %}
+<script type="text/javascript">
+    layui.use(['form', 'element', 'common', 'inputMonitor', 'dispgrid'], function () {
+        var $ = layui.jquery,
+            form = layui.form(),
+            el = layui.element(),
+            com = layui.common();
+        var billType = 'CRM_ORDER_N3|R', detailBillType = 'CRM_SMS|R';
+        // 初始化
+        com.init({
+            callback: function () {
+                // 签名
+                $('input[name="sign"]').attr('placeholder', this.options.shop_name).val(this.options.shop_name);
+
+                loadSetting();
+            }
+        });
+        // 监控短信内容修改
+        var monitor = layui.inputMonitor({
+            container: '.sms-form-tab'
+        });
+        // 表单验证
+        form.verify({
+            sign: window.signVerify
+        });
+        // 保存
+        form.on('submit(save)', function (data) {
+            try {
+                saveSetting(data);
+            } catch (e) {
+                layer.alert(e.message);
+            }
+            return false;
+        });
+        // 加载设置
+        function loadSetting() {
+            com.ajax({
+                action: 'get_editfields',
+                data: {
+                    id: 1,
+                    billType: billType,
+                    forBillType: 0,
+                    parentId: 0,
+                    raw:1
+                },
+                success: function (result) {
+                    var row = result.tbl;
+                    // 是否启用
+                    $('input[name="enable"][value="' + (row.enable ? '1' : '0') + '"]').prop('checked', 'checked');
+                    // 关怀条件
+                    $('select[name="ignore_days"]').val(row.ignore_days || '0');
+                    // 时间
+                    $('select[name="hour"]').val(Math.floor(row.min1 / 60) || '9');
+                    $('select[name="minute"').val(row.min1 % 60 || '00');
+
+                    // 短信内容和签名
+                    var o = parseSMS(row.sms);
+
+                    var $sms = $('textarea[name="sms"]');
+                    var $sign = $('input[name="sign"]');
+                    if (row.enable) {
+                        $sms.val(o.sms || '');
+                        $sign.val(o.sign);
+                    } else {
+                        // 没启用时没内容设置为默认内容
+                        $sms.val(o.sms ? o.sms : $sms.data('default'));
+                        $sign.val(o.sign || $sign.attr('placeholder'));
+                    }
+                    
+                    $('button[name="save"],button[name="test"]').removeAttr('disabled');
+
+                    form.render();
+
+                    monitor.refresh();
+                }
+            });
+        }
+        // 保存
+        function saveSetting(data) {
+            var field = data.field;
+
+            var row = {
+                id: 1,
+                enable: field.enable == '1',
+                products_id: ['-'],
+                seller_flag: '',
+                amt1: null,
+                amt2: null,
+                qty1: null,
+                qty2: null,
+                areas_id: ['-'],
+                min1: (parseInt(field.hour) * 60 + parseInt(field.minute)),
+                sms: monitor.getSMS(),
+                ignore_days: field.ignore_days
+            };
+            // 保存
+            com.ajax({
+                action: 'save_baseinfo',
+                data: {
+                    billType: billType,
+                    forBillType: 0,
+                    row: JSON.stringify(row)
+                },
+                success: function (result) {
+                    layer.msg('操作成功', { icon: 1, time: 1000 });
+                }
+            });
+        }
+
+        // 以下是明细部分
+        var dispGrid;
+        // tab切换时显示 发送记录明细
+        el.on('tab', function (data) {
+            if (data.index == 1) {
+                if (dispGrid) {
+                    dispGrid.reload();
+                } else {
+                    var d1 = com.now().addMonths(-3);
+                    var d2 = com.now();
+
+                    d1.clearTime();
+                    d2.clearTime();
+                    
+                    // 设置默认的查询条件
+                    $('input[name=">dt_send"]').val(d1.format('yyyy-MM-dd'));
+                    $('input[name="<dt_send"]').val(d2.format('yyyy-MM-dd'));
+
+                    dispGrid = layui.dispgrid({
+                        dataParams: {
+                            billType: detailBillType
+                        }
+                    });
+                    dispGrid.setSearch({
+                        '>dt_send': d1,
+                        '<dt_send': d2
+                    });
+                    dispGrid.init();
+                }
+            }
+        });
+        // 查询发送记录
+        form.on('submit(search)', function (data) {
+            try {
+                dispGrid.reload(data.field, true);
+            } catch (e) {
+                layer.alert(e.message);
+            }
+            return false;
+        });
+    });
+</script>

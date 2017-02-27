@@ -1,0 +1,215 @@
+<script src="assets/js/echarts.min.js?v={{site.version}}"></script>
+<script>
+    layui.use(['form','common'], function () {
+        var com = layui.common(),
+            $ = layui.jquery,
+            form = layui.form(),
+            layer = layui.layer;
+        com.init();
+        //减一个
+        $(".jianbtnli").click(function () {
+            var lis = $(".amtul").find('li');
+            if (lis.length > 4)
+                $('.jianbtnli').prev().remove();
+        });
+        //加一个
+        $(".jiabtnli").click(function () {
+            var lis = $(".amtul").find('li');
+            if (lis.length < 11)
+                $(".jianbtnli").before("<li><input type='text' class='layui-input' /></li>");
+        });
+
+        //监听确定
+        form.on('submit', function (data) {
+            var p = '';
+            var prev_v = 0;
+            var txt = $(".amtul input[type='text']");
+            var isReturn = false;
+            txt.each(function (x, h) {
+                var v = $(h).val();
+                if (!v || v.length == 0)
+                    return;
+                if (new RegExp(regexEnum.decmal1).test(v)) {
+                    if (parseFloat(v) <= prev_v) {
+                        layer.alert('后面的交易额必须大于前面的交易额', { icon: 2, end: function () { $(h).focus(); } });
+                        isReturn = true;
+                        return;
+                    } else {
+                        p += "|" + v;
+                        prev_v = parseInt(v);
+                    }
+                } else {
+                    layer.alert('请输入正确的交易额', { icon: 2, end: function () { $(h).focus(); } });
+                    isReturn = true;
+                    return;
+                }
+            });
+            if (isReturn)
+                return false;
+            if (p.length > 0) {
+                p = p.substr(1);
+                //保存参数
+                com.ajax({
+                    action: 'saveRptPara',
+                    data: {
+                        code: 'MA',
+                        v: p
+                    },
+                    success: function (result) {
+                        LoadData(p);
+                    }
+                });
+            }
+            return false;
+        });
+        
+
+        var para = "10|20|50|100|500";//默认
+        com.ajax({
+            action: 'getRptPara',
+            data: {
+                code: 'MA'
+            },
+            success: function (result) {
+                if (result.msg && result.msg.length > 0) {
+                    para = result.msg;
+                    var arr = para.split('|');
+                    var txt = $(".amtul input[type='text']");
+                    txt.each(function (x, h) {
+                        if (x <= arr.length - 1) {
+                            $(h).val(arr[x]);
+                        } else {//多余的参数项删除
+                            $(h).parent().remove();
+                        }
+                    });
+                    if (arr.length > txt.length)//超过当前参数项，增加
+                    {
+                        for (var i = txt.length; i < arr.length; i++) {
+                            $(".jianbtnli").before("<li><input type='text'  class='layui-input' value='" + arr[i] + "' /></li>");
+                        }
+                    }
+                }
+                LoadData(para);
+            }
+        });
+
+        function LoadData(para) {
+            com.ajax({
+                action: 'getMemberAmtRpt',
+                data: {
+                    v: para
+                },
+                success: function (result) {
+                    var para_arr = para.split('|');
+                    var x_d = [];
+                    var x_data = [];
+                    var item = result.tbl && result.tbl.length > 0 ? result.tbl[0] : null;
+
+                    for (var j = 0; j < para_arr.length; j++) {
+                        if (j == 0) {
+                            if (para_arr.length > 5)
+                                x_d.push(para_arr[0] + '内');
+                            else
+                                x_d.push(para_arr[0] + '元内');
+                        } else {
+                            if (para_arr.length > 5)
+                                x_d.push(para_arr[j - 1] + '至' + para_arr[j] + '');
+                            else
+                                x_d.push(para_arr[j - 1] + '元至' + para_arr[j] + '元内');
+                        }
+                        if (item)//获取对应金额
+                            x_data.push(item['amt_' + para_arr[j]] || 0);
+                        else
+                            x_data.push(0);
+                    }
+                    x_d.push(para_arr[para_arr.length - 1] + '元以上');
+                    if (item)//获取最后一个金额
+                        x_data.push(item.amt_last || 0);
+                    else
+                        x_data.push(0);
+
+                    $("#chartdiv").empty();
+                    // 初始化echarts实例
+                    var myChart = echarts.init(document.getElementById('chartdiv'));
+
+                    // 指定图表的配置项和数据
+                    var option = {
+                        tooltip: {
+                            trigger: 'axis',
+                            axisPointer: {// 坐标轴指示器，坐标轴触发有效
+                                type: 'shadow'// 默认为直线，可选为：'line' | 'shadow'
+                            }
+                        },
+                        backgroundColor: '#FFF',
+                        legend: {
+                            data: [{ name: '会员数' }],
+                            right: '10%',
+                            textStyle: {
+                                color: '#6F6F6F',
+                                fontSize: 16
+                            }
+                        },
+                        xAxis: {
+                            data: x_d,
+                            boundaryGap: false,
+                            axisLine: {//是否显示坐标
+                                show: false
+                            },
+                            axisTick: {//是否显示刻度线
+                                show: false
+                            },
+                            axisLabel: {
+                                textStyle: {
+                                    color: '#6F6F6F',
+                                    fontSize: 16
+                                }
+                            }
+                        },
+                        yAxis: {
+                            name: '人',
+                            type: 'value',
+                            nameTextStyle: {
+                                color: '#6F6F6F',
+                                fontSize: 18
+                            },
+                            axisLabel: {
+                                textStyle: {
+                                    color: '#6F6F6F',
+                                    fontSize: 16
+                                }
+                            },
+                            axisLine: {
+                                show: false
+                            },
+                            axisTick: {//是否显示刻度线
+                                show: false
+                            }
+                        },
+                        series: [{
+                            name: '会员数',
+                            type: 'line',
+                            data: x_data,
+                            itemStyle: {
+                                normal: { color: '#0797EE' },
+                                emphasis: { color: '#0797EE' },
+                                shadowBlur: 200
+                            },
+                            lineStyle: {
+                                normal: {
+                                    color: '#0797EE'
+                                }
+                            },
+                            smooth: true,
+                            symbolSize: 10,
+                            areaStyle: { normal: {color:'#d2eaff'} }
+                        }]
+                    };
+
+                    // 使用刚指定的配置项和数据显示图表。
+                    myChart.setOption(option);
+                }
+            });
+        }
+    });
+
+</script>

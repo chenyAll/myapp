@@ -1,0 +1,128 @@
+---
+layout:  default
+title:   客户分组-客户资料补全
+script:
+---
+<div class="page-container">
+    <div class="page-alert show-border"><i class="crm-icon crm-icon-zhuyi"></i>提示：导入时系统会自动过滤 重复客户，故不会产生客户重复的现象。</div>
+    <div class="page-content show-border">
+        <div class="page-head show-tool">
+            <span class="str-name">客户资料补全</span>
+            <span class="str-desc">因为淘宝接口只支持获取近三个月订单，如果要向更多的客户发送短信，需要手动导入当前店铺三个月前的订单数据。</span>
+        </div>
+		<div class="page-search">
+			<form target="layui-upload-iframe" method="post" enctype="multipart/form-data" action="">
+			<table>
+				<tr>
+				<td align="center" style="padding:54px 100px">
+				<label class="layui-form-label" style="width:auto">第一步：从淘宝导出历史订单</label><br/>
+				<button class="layui-btn layui-btn-normal" onclick="window.open('https://tradearchive.taobao.com/trade/itemlist/list_export_order.htm');return false">开始下载订单</button>
+				</td>
+
+				<td align="center" style="padding:54px 100px">
+				<label class="layui-form-label" style="width:auto">第二步：将导出的订单上传到软件里</label><br/>
+				<input type="file" name="upFile" lay-type="file" lay-title="上传从淘宝得到的csv文件" lay-ext="csv" class="layui-upload-file" />				
+				</td>
+				</tr>
+			</table>			
+			</form>
+            
+            <hr />
+            <div id="dataContainer"></div>
+		</div>
+	</div>
+</div>
+
+<script id="dataTemplate" type="text/template">
+    <table class="base-table">
+        <thead>
+            <!-- 表头 -->
+            <tr>
+                <th>导入时间</th>
+                <th>文件名</th>
+                <th>导入数据范围</th>
+                <th>状态</th>
+                <th>备注</th>
+            </tr>
+        </thead>
+        <tbody>
+            {@if loading}
+            <tr>
+                <td colspan="5"><div class="table-loading">正在加载...</div></td>
+            </tr>
+            {@else if !tbl || tbl.length ==0 }{# 无数据}
+            <tr>
+                <td colspan="5"><div class="table-empty">暂无相关数据！</div></td>
+            </tr>
+            {@else}
+            {@each tbl as row}{# 这里是注释，循环生成数据行}
+            <tr>
+                <td>${row.date_created|fm_stime}</td>
+                <td>${row.file}</td>
+                <td>${row.d1|fm_stime}至${row.d2|fm_stime}</td>
+                <td>${row.state|stateName}</td>
+                <td>{@if row.state==3} 导入会员数：${row.n}
+                {@else if row.state==2}<button class="layui-btn layui-btn-small" onclick="layui.retry(${row.id})">重试</button> 
+                <button class="layui-btn layui-btn-small" onclick="layer.msg('${row.sms}')">错误信息</button>
+                {@/if}
+                </td>
+            </tr>
+            {@/each}
+            {@/if}
+        </tbody>
+    </table>
+</script>
+
+<script>
+layui.use(['common', 'form', 'dispgrid', 'upload', 'layer'], function () {
+    var com = layui.common();
+    com.init();
+
+	layui.upload({
+	    url: 'process.aspx?action=b_crm_cust',
+	    success: function(r){
+	        if (r.success) {
+	            layer.msg('上传成功，可在下面列表中查看任务状态');
+	            dispGrid.load();
+	        }
+	        else
+	            layer.alert(r.msg, { icon: 5 });
+	    }
+	}); 
+
+	juicer.register('stateName', function (s) {
+	    return {0:"待处理", 1:"处理中", 2:"处理失败", 3:"处理成功"}[s];
+	});
+
+	juicer.register('rowName', function (r) {
+	    if (r.state == 3)
+	        return "导入会员数：" + r.n;
+	    else if (r.state == 2)
+	        return "<div>abc</div>";
+	    else
+	        return "";
+	});
+
+	var dispGrid = layui.dispgrid({
+	    checkAll: true,
+	    dataParams:{
+	        action: 'b_crm_cust',
+	        log: 1,
+	        limit: 0 
+	    }
+	});
+
+	dispGrid.init();
+
+	layui.retry = function(id){
+	    com.ajax({
+	        action: 'b_crm_cust',
+	        data: {id: id},
+	        success: function(){
+	            layer.msg("已发起重试，可在当前列表中查看任务状态");
+	            dispGrid.load();
+	        }
+	    });
+	}
+});
+</script>
